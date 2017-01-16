@@ -1,0 +1,35 @@
+{
+  "name": "extraordinary-rhymes",
+  "version": "1.0.0",
+  "description": "Web app for writing and marking up song lyrics, specfically rap.",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameshyen/ExtraordinaryRhymes.git"
+  },
+  "keywords": [
+    "rap",
+    "rhyme",
+    "poetry",
+    "song",
+    "structure",
+    "bar",
+    "beat",
+    "time",
+    "measure"
+  ],
+  "author": "James Yen",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jameshyen/ExtraordinaryRhymes/issues"
+  },
+  "homepage": "https://github.com/jameshyen/ExtraordinaryRhymes#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-env": "^1.1.8",
+    "bootstrap": "^3.3.7"
+  }
+}
