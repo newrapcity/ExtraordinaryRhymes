@@ -9,5 +9,10 @@
 
 $("#lyrics").on("keypress", function () {
   var lyrics = $("#lyrics").val();
-  $("#markup").html(lyrics);
+  var wordArray = lyrics.replace(/[\n]/, " ");
+  wordArray = wordArray.split(" ");
+  var markup = wordArray.map(function (word) {
+    return "{" + word + "}";
+  });
+  $("#markup").html(markup);
 });

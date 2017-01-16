@@ -7,5 +7,8 @@
 
 $("#lyrics").on("keypress", function() {
   let lyrics = $("#lyrics").val();
-  $("#markup").html(lyrics);
+  let wordArray = lyrics.replace(/[\n]/, " ");
+  wordArray = wordArray.split(" ");
+  let markup = wordArray.map(word => "{" + word + "}");
+  $("#markup").html(markup);
 });
