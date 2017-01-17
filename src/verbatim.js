@@ -5,10 +5,37 @@
 
 //$(window).on("load", write)
 
+//let re = /[^a-zA-Z0-9'’]*/;
+//let re = /[\s\n]*/;
+
+//let wordArray = lyrics.replace(/[\n\s]/, "~");
+//wordArray = lyrics.replace(/[^a-zA-Z0-9'’~]/, "");
+//wordArray = wordArray.split("~");
+
 $("#lyrics").on("keypress", function() {
   let lyrics = $("#lyrics").val();
-  let wordArray = lyrics.replace(/[\n]/, " ");
-  wordArray = wordArray.split(" ");
-  let markup = wordArray.map(word => "{" + word + "}");
+
+  let spaces = /[\s\n]/;
+  let words = /^[a-zA-Z0-9]+$/;
+  let endPunct = /[^a-zA-Z0-9]$/;
+  let startPunct = /^[^a-zA-Z0-9]/;
+
+  let wordArray = lyrics.split(spaces);
+  let newWordArray = [];
+
+  wordArray.forEach(word => {
+    if (words.test(word)) {
+      newWordArray.push(word);
+      //console.log(word);
+    } else if (startPunct.test(word) || endPunct.test(word)) {
+      word.replace(/[^a-zA-Z0-9]/, "");
+      newWordArray.push(word);
+      //console.log(word);
+    } else {
+      //Pass.
+    }
+  })
+
+  let markup = newWordArray.map(word => "{" + word + "}");
   $("#markup").html(markup);
 });
