@@ -21,11 +21,12 @@ $('#lyrics').on('keypress', () => {
         newWordArray.push(word);
         // console.log(word);
       } else if (startPunct.test(word) || endPunct.test(word)) {
-        const stripWord = word.replace(punct, '');
-        newWordArray.push(stripWord);
+        // const stripWord = word.replace(punct, '');
+        // newWordArray.push(stripWord);
+        newWordArray.push(word);
         // console.log(stripWord);
       } else {
-        // Pass.
+        newWordArray.push(word);
       }
     });
     newWordArray = newWordArray.join(' ');

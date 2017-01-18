@@ -23,12 +23,13 @@ $('#lyrics').on('keypress', function () {
         newWordArray.push(word);
         // console.log(word);
       } else if (startPunct.test(word) || endPunct.test(word)) {
-        var stripWord = word.replace(punct, '');
-        newWordArray.push(stripWord);
+        // const stripWord = word.replace(punct, '');
+        // newWordArray.push(stripWord);
+        newWordArray.push(word);
         // console.log(stripWord);
       } else {
-          // Pass.
-        }
+        newWordArray.push(word);
+      }
     });
     newWordArray = newWordArray.join(' ');
     newWordArray += '\n';
