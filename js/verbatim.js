@@ -18,9 +18,10 @@ $("#lyrics").on("keypress", function () {
   var lyrics = $("#lyrics").val();
 
   var spaces = /[\s\n]/;
-  var words = /^[a-zA-Z0-9]+$/;
-  var endPunct = /[^a-zA-Z0-9]$/;
-  var startPunct = /^[^a-zA-Z0-9]/;
+  var words = /^[a-zA-Z0-9'‘’!]+$/;
+  var endPunct = /[a-zA-Z0-9'‘’!]+[^a-zA-Z0-9'‘’!]$/;
+  var startPunct = /^[^a-zA-Z0-9'‘’!][a-zA-Z0-9'‘’!]+/;
+  var punct = /[^a-zA-Z0-9'‘’!]/;
 
   var wordArray = lyrics.split(spaces);
   var newWordArray = [];
@@ -30,12 +31,12 @@ $("#lyrics").on("keypress", function () {
       newWordArray.push(word);
       //console.log(word);
     } else if (startPunct.test(word) || endPunct.test(word)) {
-      word.replace(/[^a-zA-Z0-9]/, "");
+      word = word.replace(punct, "");
       newWordArray.push(word);
-      //console.log(word);
+      console.log(word);
     } else {
-        //Pass.
-      }
+      //Pass.
+    }
   });
 
   var markup = newWordArray.map(function (word) {
