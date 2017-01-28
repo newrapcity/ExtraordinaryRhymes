@@ -13,25 +13,27 @@ $('#lyrics').on('keypress', () => {
   const lineArray = $('#lyrics').val().split(newline);
   let lyrics = '';
   let wordArray = [];
-  let newWordArray = [];
+  let withPunct = [];
+  let withoutPunct = [];
 
   lineArray.forEach((line) => {
-    newWordArray = [];
+    withPunct = [];
     wordArray = line.split(space);
     wordArray.forEach((word) => {
       if (words.test(word)) {
-        newWordArray.push(word);
+        withPunct.push(word);
+        withoutPunct.push(word);
       } else if (startPunct.test(word) || endPunct.test(word)) {
-        // const stripWord = word.replace(punct, '');
-        // newWordArray.push(stripWord);
-        newWordArray.push(word);
+        const stripWord = word.replace(punct, '');
+        withoutPunct.push(stripWord);
+        withPunct.push(word);
       } else {
-        newWordArray.push(word);
+        withPunct.push(word);
       }
     });
-    newWordArray = newWordArray.join(' ');
-    newWordArray += '\n';
-    lyrics += newWordArray;
+    withPunct = withPunct.join(' ');
+    withPunct += '\n';
+    lyrics += withPunct;
   });
 
   // const markup = newWordArray.map(word => `{${word}}`);
