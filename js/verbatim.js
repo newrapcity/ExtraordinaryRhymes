@@ -41,14 +41,8 @@ $('#lyrics').on('keypress', function () {
     lyrics += withPunct;
   });
 
-  for (var i = 0; i < withPunct.length; i++) {
-    for (var k = i + 1; k < withPunct.length; k++) {
-      // Meh.
-    }
-  }
-
   // const markup = newWordArray.map(word => `{${word}}`);
-  $('#markup').html(withoutPunct);
+  $('#markup').html(lyrics);
 });
 
 $('#markup').on('change', function () {});
