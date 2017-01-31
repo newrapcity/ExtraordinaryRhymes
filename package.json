@@ -4,7 +4,8 @@
   "description": "Web app for writing and marking up song lyrics, specfically rap.",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d js"
+    "build": "babel src -d js",
+    "lint":  "eslint src"
   },
   "repository": {
     "type": "git",
