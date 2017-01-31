@@ -7,14 +7,17 @@ const endPunct = /[a-zA-Z0-9'‘’!]+[^a-zA-Z0-9'‘’!]$/;
 const startPunct = /^[^a-zA-Z0-9'‘’!][a-zA-Z0-9'‘’!]+/;
 const punct = /[^a-zA-Z0-9'‘’!]/;
 
+let withoutPunct = [];
+let withPunct = [];
+
 const returnBraces = function returnBraces(wordArray) {};
 
 $('#lyrics').on('keypress', () => {
   const lineArray = $('#lyrics').val().split(newline);
   let lyrics = '';
   let wordArray = [];
-  let withPunct = [];
-  let withoutPunct = [];
+  withPunct = [];
+  withoutPunct = [];
 
   lineArray.forEach((line) => {
     withPunct = [];
@@ -36,8 +39,16 @@ $('#lyrics').on('keypress', () => {
     lyrics += withPunct;
   });
 
+  for (let i = 0; i < withoutPunct.length; i++) {
+    if (withoutPunct[i].toLowerCase() === 'neck') {
+      withoutPunct[i] = '<mark style=\"background-color:yellow;color:black\">neck</mark>';
+    } 
+  }
+
   // const markup = newWordArray.map(word => `{${word}}`);
-  $('#markup').html(lyrics);
+  $('#markup').html(withoutPunct);
 });
 
-$('#markup').on('change', () => {});
+$('#markup').on('change', () => {
+  console.log(withoutPunct);
+});
