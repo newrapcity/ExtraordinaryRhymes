@@ -39,16 +39,14 @@ $('#lyrics').on('keypress', () => {
     lyrics += withPunct;
   });
 
-  for (let i = 0; i < withoutPunct.length; i++) {
-    if (withoutPunct[i].toLowerCase() === 'neck') {
-      withoutPunct[i] = '<span style=\"color:red;\">neck</span>';
-    } 
+  for (let i = 0; i < withPunct.length; i++) {
+    for (let k = i + 1; k < withPunct.length; k++) {
+      // Meh.
+    }
   }
 
   // const markup = newWordArray.map(word => `{${word}}`);
   $('#markup').html(withoutPunct);
 });
 
-$('#markup').on('change', () => {
-  console.log(withoutPunct);
-});
+$('#markup').on('change', () => {});
