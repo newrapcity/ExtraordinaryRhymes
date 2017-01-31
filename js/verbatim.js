@@ -41,9 +41,9 @@ $('#lyrics').on('keypress', function () {
     lyrics += withPunct;
   });
 
-  for (var i = 0; i < withoutPunct.length; i++) {
-    if (withoutPunct[i].toLowerCase() === 'neck') {
-      withoutPunct[i] = '<span style=\"color:red;\">neck</span>';
+  for (var i = 0; i < withPunct.length; i++) {
+    for (var k = i + 1; k < withPunct.length; k++) {
+      // Meh.
     }
   }
 
@@ -51,6 +51,4 @@ $('#lyrics').on('keypress', function () {
   $('#markup').html(withoutPunct);
 });
 
-$('#markup').on('change', function () {
-  console.log(withoutPunct);
-});
+$('#markup').on('change', function () {});
