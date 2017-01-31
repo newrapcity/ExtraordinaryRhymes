@@ -4,15 +4,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function typeCheck(bars) {
   var checks = 0;
-  var typeCheck = bars.forEach(function (bar) {
+  var check = bars.forEach(function (bar) {
     if (!(bar instanceof Bar)) {
       return false;
     }
-    checks++;
+    checks += 1;
     if (checks === bars.length) {
       return true;
     }
   });
+  return check;
 }
 
 var Verse = function Verse(size, bars) {

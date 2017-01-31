@@ -1,14 +1,15 @@
 function typeCheck(bars) {
   let checks = 0;
-  let typeCheck = bars.forEach(bar => {
+  const check = bars.forEach((bar) => {
     if (!(bar instanceof Bar)) {
-      return false; 
+      return false;
     }
-    checks++;
+    checks += 1;
     if (checks === bars.length) {
       return true;
     }
   });
+  return check;
 }
 
 class Verse {
