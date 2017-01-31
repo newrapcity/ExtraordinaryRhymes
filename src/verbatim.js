@@ -41,7 +41,7 @@ $('#lyrics').on('keypress', () => {
 
   for (let i = 0; i < withoutPunct.length; i++) {
     if (withoutPunct[i].toLowerCase() === 'neck') {
-      withoutPunct[i] = '<mark style=\"background-color:yellow;color:black\">neck</mark>';
+      withoutPunct[i] = '<span style=\"color:red;\">neck</span>';
     } 
   }
 
