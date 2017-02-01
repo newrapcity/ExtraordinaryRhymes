@@ -1,0 +1,11 @@
+Thus far:
+
+1) Use Lettering.js to do word parsing and hovering. Hopefully it allows me to style the spans that surround each word.
+
+http://stackoverflow.com/questions/6865714/highlight-an-individual-word-within-a-text-block-on-hover
+
+http://letteringjs.com/
+
+2) Use ECMAScript 6 classes to create song blocks and structures (i.e. verse, chorus, hook, bridge, intro, and so on) and have these classes have methods that work on themselves. We don't want phrases to rhyme outside of themselves.
+
+Interesting thought: the abstraction of the song must (is) match the literal representation of the song. In other words, how the song is represented theoretically (in code), must somehow match what the song "actually is." This is not just abstract or helpful, but is the most practical way to actually go about it, and thus, the easiest way.
