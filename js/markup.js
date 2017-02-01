@@ -9,21 +9,18 @@ var endPunct = /[a-zA-Z0-9'‘’!]+[^a-zA-Z0-9'‘’!]$/;
 var startPunct = /^[^a-zA-Z0-9'‘’!][a-zA-Z0-9'‘’!]+/;
 var punct = /[^a-zA-Z0-9'‘’!]/;
 
-var withoutPunct = [];
-var withPunct = [];
-
-var returnBraces = function returnBraces(wordArray) {};
+var song = [];
 
 $('#lyrics').on('keypress', function () {
   var lineArray = $('#lyrics').val().split(newline);
   var lyrics = '';
-  var wordArray = [];
-  withPunct = [];
-  withoutPunct = [];
+  var index = 0;
 
   lineArray.forEach(function (line) {
-    withPunct = [];
-    wordArray = line.split(space);
+    var withPunct = [];
+    var withoutPunct = [];
+    var wordArray = line.split(space);
+
     wordArray.forEach(function (word) {
       if (words.test(word)) {
         withPunct.push(word);
@@ -36,13 +33,15 @@ $('#lyrics').on('keypress', function () {
         withPunct.push(word);
       }
     });
+
     withPunct = withPunct.join(' ');
     withPunct += '\n';
     lyrics += withPunct;
+
+    song[index] = withoutPunct.slice();
+    index += 1;
   });
 
-  // const markup = newWordArray.map(word => `{${word}}`);
   $('#markup').html(lyrics);
+  process(song);
 });
-
-$('#markup').on('change', function () {});

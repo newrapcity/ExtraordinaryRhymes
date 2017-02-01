@@ -4,23 +4,41 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Bar = function () {
-  function Bar(line) {
-    _classCallCheck(this, Bar);
+function typeCheck(bars) {
+  var checks = 0;
+  var check = bars.forEach(function (bars) {
+    if (!(bar instanceof Bar)) {
+      return false;
+    }
+    checks += 1;
+    if (checks === bars.length) {
+      return true;
+    }
+  });
+  return check;
+}
 
-    if (typeof line === 'string') {
-      this.line = line;
+var Phrase = function () {
+  function Phrase(bars) {
+    _classCallCheck(this, Phrase);
+
+    if (bars.length !== 4) {
+      throw new PhraseException('Phrase must consist of four Bars.');
+    } else if (!typeCheck(bars)) {
+      throw new PhraseException('Phrase object must consist four Bar objects.');
     } else {
-      throw new BarException('Bar variable does not consist of a string.');
+      this.bars = bars;
     }
   }
 
-  _createClass(Bar, [{
-    key: 'getLine',
-    value: function getLine() {
-      return this.line;
+  _createClass(Phrase, [{
+    key: 'print',
+    value: function print() {
+      for (var i = 0; i < bars.length; i++) {
+        console.log(this.bars[i].getLine());
+      }
     }
   }]);
 
-  return Bar;
+  return Phrase;
 }();
