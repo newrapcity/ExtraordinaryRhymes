@@ -8,10 +8,14 @@ var Bar = function () {
   function Bar(line) {
     _classCallCheck(this, Bar);
 
-    if (typeof line === 'string') {
-      this.line = line;
-    } else {
-      throw new BarException('Bar variable does not consist of a string.');
+    try {
+      if (typeof line === 'string') {
+        this.line = line;
+      } else {
+        throw new BarException('Bar variable does not consist of a string.');
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 

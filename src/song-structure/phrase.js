@@ -1,6 +1,6 @@
-function typeCheck(bars) {
+function typeCheckPhrase(bars) {
   let checks = 0;
-  const check = bars.forEach((bars) => {
+  const check = bars.forEach((bar) => {
     if (!(bar instanceof Bar)) {
       return false;
     }
@@ -13,17 +13,21 @@ function typeCheck(bars) {
 }
 
 class Phrase {
-  constructor(bars) {     
-    if (bars.length !== 4) {
-      throw new PhraseException('Phrase must consist of four Bars.');
-    } else if (!typeCheck(bars)) {
-      throw new PhraseException('Phrase object must consist four Bar objects.');
-    } else {
-      this.bars = bars;
+  constructor(bars) {
+    try {     
+      if (bars.length !== 4) {
+        throw new PhraseException('Phrase must consist of four Bars.');
+      } else if (typeCheckPhrase(bars)) {
+        throw new PhraseException('Phrase object must consist four Bar objects.');
+      } else {
+        this.bars = bars;
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
   print() {
-    for (let i = 0; i < bars.length; i++) {
+    for (let i = 0; i < this.bars.length; i++) {
       console.log(this.bars[i].getLine());
     }
   }

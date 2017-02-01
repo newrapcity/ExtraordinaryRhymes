@@ -6,15 +6,16 @@ function process(song) {
   song.forEach(function (bar, index) {
     bar = bar.join(' ');
     bar = new Bar(bar);
-    song[index] = $.extend(true, {}, bar);
+    song[index] = bar;
+    console.log(bar.getLine());
   });
 
   var phrase = [];
   for (var i = 0; i < song.length; i++) {
-    phrase.push($.extend(true, {}, song[i]));
+    phrase.push(song[i]);
     if ((i + 1) % 4 === 0) {
       phrase = new Phrase(phrase);
-      blah.push($.extend(true, {}, phrase));
+      blah.push(phrase);
       phrase = [];
     }
   }

@@ -38,8 +38,10 @@ $('#lyrics').on('keypress', function () {
     withPunct += '\n';
     lyrics += withPunct;
 
-    song[index] = withoutPunct.slice();
-    index += 1;
+    if (withoutPunct.length > 0) {
+      song[index] = withoutPunct.slice();
+      index += 1;
+    }
   });
 
   $('#markup').html(lyrics);
