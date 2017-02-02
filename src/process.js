@@ -1,24 +1,34 @@
-function process(song) {
-  let blah = [];
+function VerseProcess(selection) {
+  const verse = [];
+  selection = BarProcess(selection);
+  selection = PhraseProcess(selection, verse);
+  verse.forEach(phrase => phrase.print());
+}
 
-  song.forEach((bar, index) => {
-    bar = bar.join(' ');
-    bar = new Bar(bar);
-    song[index] = bar
-    console.log(bar.getLine());
-  });
-
+// This is passed an array of bars and returns an array of phrases.
+function PhraseProcess(selection, verse) {
   let phrase = [];
-  for (let i = 0; i < song.length; i++) {
-    phrase.push(song[i]);
+  for (let i = 0; i < selection.length; i++) {
+    phrase.push(selection[i]);
     if ((i + 1) % 4 === 0) {
       phrase = new Phrase(phrase);
-      blah.push(phrase);
+      verse.push(phrase);
       phrase = [];
     }
   }
+}
 
-  for (let i = 0; i < blah.length; i++) {
-    blah[i].print();
-  }
-};
+// This is passed a 2d array, each row is a list of words.
+function BarProcess(selection) {
+  selection.forEach((bar, index) => {
+    bar = bar.join(' ');
+    bar = new Bar(bar);
+    selection[index] = bar;
+  });
+  return selection;
+}
+
+function ChorusProcess() {}
+function IntroProcess() {}
+function BridgeProcess() {}
+function OutroProcess() {}

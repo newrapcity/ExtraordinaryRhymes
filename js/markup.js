@@ -44,6 +44,10 @@ $('#lyrics').on('keypress', function () {
     }
   });
 
+  VerseProcess(song);
   $('#markup').html(lyrics);
-  process(song);
+});
+
+$('#lyrics').on('select', function (text) {
+  console.log(text);
 });

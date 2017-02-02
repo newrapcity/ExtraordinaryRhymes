@@ -14,7 +14,7 @@ function typeCheckPhrase(bars) {
 
 class Phrase {
   constructor(bars) {
-    try {     
+    try {
       if (bars.length !== 4) {
         throw new PhraseException('Phrase must consist of four Bars.');
       } else if (typeCheckPhrase(bars)) {
@@ -30,5 +30,6 @@ class Phrase {
     for (let i = 0; i < this.bars.length; i++) {
       console.log(this.bars[i].getLine());
     }
+    console.log('\n');
   }
 }

@@ -41,6 +41,7 @@ var Phrase = function () {
       for (var i = 0; i < this.bars.length; i++) {
         console.log(this.bars[i].getLine());
       }
+      console.log('\n');
     }
   }]);
 

@@ -12,5 +12,5 @@ function BarException(message) {
 
 function PhraseException(message) {
   this.message = message;
-  this.name = "PhraseException";
+  this.name = 'PhraseException"=';
 }

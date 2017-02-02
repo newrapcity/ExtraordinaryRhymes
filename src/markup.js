@@ -7,7 +7,7 @@ const endPunct = /[a-zA-Z0-9'‘’!]+[^a-zA-Z0-9'‘’!]$/;
 const startPunct = /^[^a-zA-Z0-9'‘’!][a-zA-Z0-9'‘’!]+/;
 const punct = /[^a-zA-Z0-9'‘’!]/;
 
-let song = [];
+const song = [];
 
 $('#lyrics').on('keypress', () => {
   const lineArray = $('#lyrics').val().split(newline);
@@ -16,8 +16,8 @@ $('#lyrics').on('keypress', () => {
 
   lineArray.forEach((line) => {
     let withPunct = [];
-    let withoutPunct = [];
-    let wordArray = line.split(space);
+    const withoutPunct = [];
+    const wordArray = line.split(space);
 
     wordArray.forEach((word) => {
       if (words.test(word)) {
@@ -42,6 +42,10 @@ $('#lyrics').on('keypress', () => {
     }
   });
 
+  VerseProcess(song);
   $('#markup').html(lyrics);
-  process(song);
+});
+
+$('#lyrics').on('select', (text) => {
+  console.log(text);
 });

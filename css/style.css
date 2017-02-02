@@ -1,5 +1,0 @@
-/* http://stackoverflow.com/questions/9726970/how-to-preserve-newlines-when-showing-a-text-file-with-jquery */
-
-div {
-    white-space: pre-line;
-}
