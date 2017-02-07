@@ -17,8 +17,8 @@
         <center><h2>Extraordinary Rhymes</h2></center>
         <br />
         <textarea class="form-control" rows="3" id="lyrics"></textarea>
-        <br />
-        <div id="head" ondrop="dropIn(event)" ondragover="displayDrag(event)"> 
+        <br />        
+        <div id="head" ondrop="dropIn(event)" ondragover="displayDrag(event)">
         </div>
         <div id="tail" ondrop="dropIn(event)" ondragover="displayDrag(event)">
         </div>
@@ -38,7 +38,9 @@
   <script type="text/javascript" src="js/process.js"></script>
   <script type="text/javascript">
     function dropIn(event) {
-
+      event.preventDefault();
+      console.log(event);
+      console.log("tesing testing");
     }
     function displayDrag(event) {
       // Nothing needed here.
