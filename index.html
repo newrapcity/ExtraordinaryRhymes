@@ -18,6 +18,10 @@
         <br />
         <textarea class="form-control" rows="3" id="lyrics"></textarea>
         <br />
+        <div id="head" ondrop="dropIn(event)" ondragover="displayDrag(event)"> 
+        </div>
+        <div id="tail" ondrop="dropIn(event)" ondragover="displayDrag(event)">
+        </div>
         <p id="markup" style="white-space:pre-line;"></p>
       </div>
       <div class="col-xs-6 col-md-3"></div>
@@ -32,5 +36,13 @@
   <script type="text/javascript" src="js/song-structure/phrase.js"></script>
   <script type="text/javascript" src="js/song-structure/verse.js"></script>
   <script type="text/javascript" src="js/process.js"></script>
+  <script type="text/javascript">
+    function dropIn(event) {
+
+    }
+    function displayDrag(event) {
+      // Nothing needed here.
+    }      
+  </script>
 </body>
 </html>
