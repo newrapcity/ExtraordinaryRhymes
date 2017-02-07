@@ -24,6 +24,11 @@ var Bar = function () {
     value: function getLine() {
       return this.line;
     }
+  }, {
+    key: 'ripLine',
+    value: function ripLine() {
+      return rip(this.line, false);
+    }
   }]);
 
   return Bar;

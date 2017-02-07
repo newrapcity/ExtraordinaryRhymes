@@ -13,4 +13,7 @@ class Bar {
   getLine() {
     return this.line;
   }
+  ripLine() {
+    return rip(this.line, false);
+  }
 }

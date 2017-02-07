@@ -32,4 +32,15 @@ class Phrase {
     }
     console.log('\n');
   }
+  rhyme() {
+    this.bars.forEach((bar) => {
+      const wordArray = bar.ripLine();
+      
+      for (let i = 0; i < wordArray.length; i++) {
+        for (let k = i + 1; k < wordArray.length; k++) {
+          // Work later.
+        }
+      } 
+    });
+  }
 }

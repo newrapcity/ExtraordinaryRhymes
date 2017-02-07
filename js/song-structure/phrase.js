@@ -43,6 +43,19 @@ var Phrase = function () {
       }
       console.log('\n');
     }
+  }, {
+    key: 'rhyme',
+    value: function rhyme() {
+      this.bars.forEach(function (bar) {
+        var wordArray = bar.ripLine();
+
+        for (var i = 0; i < wordArray.length; i++) {
+          for (var k = i + 1; k < wordArray.length; k++) {
+            // Work later.
+          }
+        }
+      });
+    }
   }]);
 
   return Phrase;
