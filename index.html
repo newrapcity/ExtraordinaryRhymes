@@ -14,14 +14,22 @@
     <div class="row">
       <div class="col-xs-6 col-md-2"></div>
       <div class="col-xs-6 col-md-8">
-        <center><h2 id="test" draggable="true" ondragstart="dragStart(event)">Extraordinary Rhymes</h2></center>
+        <center><h2>Extraordinary Rhymes</h2></center>
         <br />
         <textarea class="form-control" rows="3" id="lyrics"></textarea>
         <br />        
-        <div id="tail" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">haha</div>
+        <div id="top" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">Start here.</div>
+        <div id="bottom" ondrop="dropIn(event, true)" ondragover="allowDrop(event)">End.</div>
         <p id="markup" style="white-space:pre-line;"></p>
       </div>
-      <div class="col-xs-6 col-md-2"></div>
+      <div class="col-xs-6 col-md-2">
+        <h4 id="intro" draggable="true" ondragstart="dragStart(event)">Intro</h4>
+        <h4 id="verse" draggable="true" ondragstart="dragStart(event)">Verse</h4>
+        <h4 id="chorus" draggable="true" ondragstart="dragStart(event)">Chorus</h4>
+        <h4 id="bridge" draggable="true" ondragstart="dragStart(event)">Bridge</h4>
+        <h4 id="outro" draggable="true" ondragstart="dragStart(event)">Outro</h4>
+        <h4 id="bin" ondragover="allowDrop(event)" ondrop="trash(event)" class="label label-danger">Bin</h4>
+      </div>
     </div>
   </div>
   <script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
@@ -35,20 +43,52 @@
   <script type="text/javascript" src="js/process.js"></script>
   <script type="text/javascript">
     var idToTransfer = "";
+    var idTextAreaToKill = "";
+
+    function replaceId(html) {
+      var decompHTML = /(.*id=")(.*?)(".*)/;
+      var decompedHTML = decompHTML.exec(html);
+      
+      var decompId = /([a-zA-Z]*)([0-9]*)/;
+      var decompedId = decompId.exec(decompedHTML[2]);
+
+      if (decompedId[2] === "") {
+        decompedId[2] = "1";
+      } else {
+        var number = parseInt(decompedId[2]);
+        number += 1;
+        decompedId[2] = number.toString();
+      }
+      var newHTML = decompedHTML[1] + decompedId[1] + decompedId[2] + decompedHTML[3];
+      return [newHTML, decompedId[1] + decompedId[2]];
+    }
+
     function dropIn(event, aboveOrBelow) {
       event.preventDefault();
+      var htmlAndId = replaceId(document.getElementById(idToTransfer.substring(1)).outerHTML);
       if (aboveOrBelow) {
-        $("#head").before(document.getElementById(idToTransfer).outerHTML);
+        $("#bottom").before(htmlAndId[0]);
+        $("#" + htmlAndId[1]).after("<textarea id=\"" + htmlAndId[1] + "-textarea\"></textarea>");
       } else {
-        $("#tail").after(document.getElementById(idToTransfer).outerHTML);
+        $("#top").after(htmlAndId[0]);
+        $("#" + htmlAndId[1]).after("<textarea id=\"" + htmlAndId[1] + "-textarea\"></textarea>");
       }
     }
+
     function allowDrop(event) {
       event.preventDefault();
     }
+
     function dragStart(event) {
-      idToTransfer = event.target.id;
-    }      
+      idToTransfer = "#" + event.target.id;
+      idTextAreaToKill = "#" + event.target.id + "-textarea";
+    }
+
+    function trash(event) {
+      event.preventDefault();
+      $(idToTransfer).remove();
+      $(idTextAreaToKill).remove();
+    }
   </script>
 </body>
 </html>
