@@ -12,17 +12,16 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-6 col-md-3"></div>
-      <div class="col-xs-6 col-md-6">
+      <div class="col-xs-6 col-md-2"></div>
+      <div class="col-xs-6 col-md-8">
         <center><h2 id="test" draggable="true" ondragstart="dragStart(event)">Extraordinary Rhymes</h2></center>
         <br />
         <textarea class="form-control" rows="3" id="lyrics"></textarea>
         <br />        
-        <div id="head" ondrop="dropIn(event, true)" ondragover="allowDrop(event)"><center><hr></hr></center></div>
-        <div id="tail" ondrop="dropIn(event, false)" ondragover="allowDrop(event)"><center><hr></hr></center></div>
+        <div id="tail" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">haha</div>
         <p id="markup" style="white-space:pre-line;"></p>
       </div>
-      <div class="col-xs-6 col-md-3"></div>
+      <div class="col-xs-6 col-md-2"></div>
     </div>
   </div>
   <script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
@@ -39,16 +38,16 @@
     function dropIn(event, aboveOrBelow) {
       event.preventDefault();
       if (aboveOrBelow) {
-        $("#head").before(document.getElementById(idToTransfer.substring(1)).outerHTML);
+        $("#head").before(document.getElementById(idToTransfer).outerHTML);
       } else {
-        $("#tail").after(document.getElementById(idToTransfer.substring(1)).outerHTML);
+        $("#tail").after(document.getElementById(idToTransfer).outerHTML);
       }
     }
     function allowDrop(event) {
       event.preventDefault();
     }
     function dragStart(event) {
-      idToTransfer = "#" + event.target.id;
+      idToTransfer = event.target.id;
     }      
   </script>
 </body>
