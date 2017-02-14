@@ -40,7 +40,7 @@ class Phrase {
         for (let k = i + 1; k < wordArray.length; k++) {
           // Work later.
         }
-      } 
+      }
     });
   }
 }

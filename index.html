@@ -18,10 +18,8 @@
         <br />
         <textarea class="form-control" rows="3" id="lyrics"></textarea>
         <br />        
-        <div id="head" ondrop="dropIn(event, true)" ondragover="allowDrop(event)">up
-        </div>
-        <div id="tail" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">down
-        </div>
+        <div id="head" ondrop="dropIn(event, true)" ondragover="allowDrop(event)"><center><hr></hr></center></div>
+        <div id="tail" ondrop="dropIn(event, false)" ondragover="allowDrop(event)"><center><hr></hr></center></div>
         <p id="markup" style="white-space:pre-line;"></p>
       </div>
       <div class="col-xs-6 col-md-3"></div>
@@ -41,9 +39,9 @@
     function dropIn(event, aboveOrBelow) {
       event.preventDefault();
       if (aboveOrBelow) {
-        $("#head").before($(idToTransfer).html());
+        $("#head").before(document.getElementById(idToTransfer.substring(1)).outerHTML);
       } else {
-        $("#tail").after($(idToTransfer).html());
+        $("#tail").after(document.getElementById(idToTransfer.substring(1)).outerHTML);
       }
     }
     function allowDrop(event) {
