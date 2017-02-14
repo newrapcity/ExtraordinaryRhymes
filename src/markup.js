@@ -1,7 +1,7 @@
 const song = [];
 
-$('#lyrics').on('keypress', () => {
-  const lineArray = $('#lyrics').val().split(newline);
+function markup(idNoHashtag, partType) {
+  const lineArray = $('#' + idNoHashtag).val().split(newline);
   let lyrics = '';
   let index = 0;
 
@@ -16,10 +16,20 @@ $('#lyrics').on('keypress', () => {
     }
   });
 
-  VerseProcess(song);
+  switch(partType) {
+    case 'bridge':
+      break;
+    case 'verse':
+      VerseProcess(song);
+      break;
+    case 'intro':
+      break;
+    case 'chorus':
+      break;
+    case 'outro':
+      break;
+    default:
+      break;
+  } 
   $('#markup').html(lyrics);
-});
-
-$('#lyrics').on('select', (text) => {
-  console.log(text);
-});
+}
