@@ -31,5 +31,6 @@ function markup(idNoHashtag, partType) {
     default:
       break;
   } 
+
   $('#markup').html(lyrics);
 }

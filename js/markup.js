@@ -2,8 +2,8 @@
 
 var song = [];
 
-$('#lyrics').on('keypress', function () {
-  var lineArray = $('#lyrics').val().split(newline);
+function markup(idNoHashtag, partType) {
+  var lineArray = $('#' + idNoHashtag).val().split(newline);
   var lyrics = '';
   var index = 0;
 
@@ -18,10 +18,21 @@ $('#lyrics').on('keypress', function () {
     }
   });
 
-  VerseProcess(song);
-  $('#markup').html(lyrics);
-});
+  switch (partType) {
+    case 'bridge':
+      break;
+    case 'verse':
+      VerseProcess(song);
+      break;
+    case 'intro':
+      break;
+    case 'chorus':
+      break;
+    case 'outro':
+      break;
+    default:
+      break;
+  }
 
-$('#lyrics').on('select', function (text) {
-  console.log(text);
-});
+  $('#markup').html(lyrics);
+}

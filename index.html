@@ -65,10 +65,16 @@
       var newId = htmlAndId[1] + htmlAndId[2];
       if (aboveOrBelow) {
         $("#bottom").before(htmlAndId[0]);
-        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\" onkeypress=\"markup(\\\"" + newId + "\\\", \\\"" + htmlAndId[1] + "\\\")\"></textarea>");
+        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\"></textarea>");
+        document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
+          markup(newId + "-textarea", htmlAndId[1]);
+        }, false);
       } else {
         $("#top").after(htmlAndId[0]);
-        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\" onkeypress=\"markup(\\\"" + newId + "\\\", \\\"" + htmlAndId[1] + "\\\")\"></textarea>");
+        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\"></textarea>");
+        document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
+          markup(newId + "-textarea", htmlAndId[1]);
+        }, false);
       }
     }
 
