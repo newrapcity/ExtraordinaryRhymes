@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d js",
-    "lint":  "eslint src"
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,5 @@
     "eslint-config-airbnb-base": "^11.0.1",
     "eslint-plugin-import": "^2.2.0"
   },
-  "dependencies": {
-    "bootstrap": "^3.3.7"
-  }
+  "dependencies": {}
 }
