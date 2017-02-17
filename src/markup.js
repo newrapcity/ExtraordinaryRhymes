@@ -16,7 +16,7 @@ function markup(idNoHashtag, partType) {
     }
   });
 
-  switch(partType) {
+  switch (partType) {
     case 'bridge':
       break;
     case 'verse':
@@ -30,7 +30,7 @@ function markup(idNoHashtag, partType) {
       break;
     default:
       break;
-  } 
+  }
 
   $('#markup').html(lyrics);
 }

@@ -1,6 +1,2 @@
-* Drag and drop song elements.
-* When parse and mark, replace? How?
-    * (Via regex?)
-    * (Or via big hash with qualities like withPunct or withoutPunct?)
-* Text fields that are styled (not like text boxes)?
-* Highlighting lyrics that triggers an event and retrieving the selection?
+* Add eventHandlers to little boxes for song parts. Not working for some reason, using the DOM.
+* Ask Flanders about the code highlighting thing, might be useful for the song.
