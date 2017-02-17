@@ -1,6 +1,8 @@
 'use strict';
 
 var api = 'https://api.datamuse.com/words?';
+var soundsLike = 'sl';
+var rhymesWith = 'rel_rhy';
 
 var space = /[\s]/;
 var newline = /[\n]/;

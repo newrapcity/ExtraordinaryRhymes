@@ -1,4 +1,6 @@
 const api = 'https://api.datamuse.com/words?';
+const soundsLike = 'sl';
+const rhymesWith = 'rel_rhy';
 
 const space = /[\s]/;
 const newline = /[\n]/;

@@ -9,7 +9,7 @@ function markup(idNoHashtag, partType) {
 
   lineArray.forEach(function (line) {
     var withoutPunct = rip(line, false);
-    line += "\n";
+    line += '\n';
     lyrics += line;
 
     if (withoutPunct.length > 0) {

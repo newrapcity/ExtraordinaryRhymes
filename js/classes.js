@@ -93,10 +93,17 @@ var Phrase = function () {
     value: function rhyme() {
       this.bars.forEach(function (bar) {
         var wordArray = bar.ripLine();
-
+        var alreadyRhymed = new Array(wordArray.length);
+        alreadyRhymed.fill(false);
         for (var i = 0; i < wordArray.length; i++) {
           for (var k = i + 1; k < wordArray.length; k++) {
-            // Work later.
+            if (!alreadyRhymed[i] && !alreadyRhymed[k]) {
+              $.ajax({
+                url: '' + api + rhymesWith + '=' + wordArray[i]
+              }).done(function (rhymeArray) {
+                // Work later.
+              });
+            }
           }
         }
       });

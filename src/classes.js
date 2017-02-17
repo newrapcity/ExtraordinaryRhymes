@@ -70,10 +70,17 @@ class Phrase {
   rhyme() {
     this.bars.forEach((bar) => {
       const wordArray = bar.ripLine();
-      
+      const alreadyRhymed = new Array(wordArray.length);
+      alreadyRhymed.fill(false);
       for (let i = 0; i < wordArray.length; i++) {
         for (let k = i + 1; k < wordArray.length; k++) {
-          // Work later.
+          if ((!alreadyRhymed[i]) && (!alreadyRhymed[k])) {
+            $.ajax({
+              url: `${api}${rhymesWith}=${wordArray[i]}`,
+            }).done((rhymeArray) => {
+              // Work later.
+            });
+          }
         }
       }
     });
