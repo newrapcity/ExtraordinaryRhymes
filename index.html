@@ -24,7 +24,7 @@
         <h4 id="bridge" draggable="true" ondragstart="dragStart(event)">Bridge</h4>
         <h4 id="outro" draggable="true" ondragstart="dragStart(event)">Outro</h4>
         <h4 id="bin" ondragover="allowDrop(event)" ondrop="trash(event)" class="label label-danger">Bin</h4>
-        <p id="markup" style="white-space:pre-line;"></p>
+        <div id="markup"></div>
       </div>
     </div>
   </div>
@@ -62,13 +62,15 @@
       var newId = htmlAndId[1] + htmlAndId[2];
       if (aboveOrBelow) {
         $("#bottom").before(htmlAndId[0]);
-        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\"></textarea>");
+        $("#" + newId).addClass(newId);
+        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control " + newId + "\"></textarea>");
         document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
           markup(newId + "-textarea", htmlAndId[1]);
         }, false);
       } else {
         $("#top").after(htmlAndId[0]);
-        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control\"></textarea>");
+        $("#" + newId).addClass(newId);
+        $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control " + newId + "\"></textarea>");
         document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
           markup(newId + "-textarea", htmlAndId[1]);
         }, false);
@@ -81,13 +83,11 @@
 
     function dragStart(event) {
       idToTransfer = "#" + event.target.id;
-      idTextAreaToKill = "#" + event.target.id + "-textarea";
     }
 
     function trash(event) {
       event.preventDefault();
-      $(idToTransfer).remove();
-      $(idTextAreaToKill).remove();
+      $("." + idToTransfer.substring(1)).remove();
     }
   </script>
 </body>
