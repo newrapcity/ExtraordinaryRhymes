@@ -6,7 +6,7 @@ const space = /[\s]/;
 const newline = /[\n]/;
 const words = /^[a-zA-Z]+$/;
 const punctWord = /^[a-zA-Z'‘’]+$/;
-const punct = /[^a-zA-Z]/;
+const punct = /[^a-zA-Z]/g;
 
 function rip(line, withOrWithout) {
   const withPunct = [];

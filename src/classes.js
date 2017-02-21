@@ -80,7 +80,9 @@ class Phrase {
       $.ajax({
         url: `${api}${rhymesWith}=${allWords[i]}`,
       }).done((rhymeArray) => {
-        wordSets.push(new Set(rhymeArray.map(result => return result['word'])));
+        wordSets.push(new Set(rhymeArray.map((result) => {
+          return result['word'];
+        })));
       });
     }
   }
