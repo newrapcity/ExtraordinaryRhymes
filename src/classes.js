@@ -69,32 +69,19 @@ class Phrase {
   }
   rhyme() {
     let allWords = [];
-    let allWordsAlreadyRhymed = [];
+    let wordSets = [];
 
     this.bars.forEach((bar) => {
       const wordArray = bar.ripLine();
-      const alreadyRhymed = new Array(wordArray.length);
-      alreadyRhymed.fill(false);
-
       allWords = allWords.concat(wordArray.slice());
-      allWordsAlreadyRhymed = allWordsAlreadyRhymed.conat(alreadyRhymed.slice());
     });
 
     for (let i = 0; i < allWords.length; i++) {
-      for (let k = i + 1; k < allWords.length; k++) {
-        if ((!allWordsAlreadyRhymed[i]) && (!allWordsAlreadyRhymed[k])) {
-          $.ajax({
-            url: `${api}${rhymesWith}=${allWords[i]}`,
-          }).done((rhymeArray) => {
-            rhymeArray.forEach((result) => {
-              if (allWords[k] === result.word) {
-                allWordsAlreadyRhymed[i] = true;
-                allWordsAlreadyRhymed[k] = true;
-              }
-            });
-          });
-        }
-      }
+      $.ajax({
+        url: `${api}${rhymesWith}=${allWords[i]}`,
+      }).done((rhymeArray) => {
+        wordSets.push(new Set(rhymeArray.map(result => return result['word'])));
+      });
     }
   }
 }
