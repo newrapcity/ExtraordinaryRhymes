@@ -1,8 +1,9 @@
 function VerseProcess(selection) {
-  const verse = [];
+  let verse = [];
   selection = BarProcess(selection);
   selection = PhraseProcess(selection, verse);
-  verse.forEach(phrase => phrase.print());
+  verse = new Verse(verse.length * 4, verse);
+  return verse.rhyme(); 
 }
 
 // This is passed an array of bars and returns an array of phrases.

@@ -68,22 +68,34 @@ class Phrase {
     console.log('\n');
   }
   rhyme() {
+    let allWords = [];
+    let allWordsAlreadyRhymed = [];
+
     this.bars.forEach((bar) => {
       const wordArray = bar.ripLine();
       const alreadyRhymed = new Array(wordArray.length);
       alreadyRhymed.fill(false);
-      for (let i = 0; i < wordArray.length; i++) {
-        for (let k = i + 1; k < wordArray.length; k++) {
-          if ((!alreadyRhymed[i]) && (!alreadyRhymed[k])) {
-            $.ajax({
-              url: `${api}${rhymesWith}=${wordArray[i]}`,
-            }).done((rhymeArray) => {
-              // Work later.
+
+      allWords = allWords.concat(wordArray.slice());
+      allWordsAlreadyRhymed = allWordsAlreadyRhymed.conat(alreadyRhymed.slice());
+    });
+
+    for (let i = 0; i < allWords.length; i++) {
+      for (let k = i + 1; k < allWords.length; k++) {
+        if ((!allWordsAlreadyRhymed[i]) && (!allWordsAlreadyRhymed[k])) {
+          $.ajax({
+            url: `${api}${rhymesWith}=${allWords[i]}`,
+          }).done((rhymeArray) => {
+            rhymeArray.forEach((result) => {
+              if (allWords[k] === result.word) {
+                allWordsAlreadyRhymed[i] = true;
+                allWordsAlreadyRhymed[k] = true;
+              }
             });
-          }
+          });
         }
       }
-    });
+    }
   }
 }
 
@@ -106,8 +118,8 @@ class Verse {
     try {
       if (size !== phrases.length * 4) {
         throw new VerseException('Purported size of verse does not match amount of bars given.');
-      } else if ([16, 32, 64].indexOf(size) === -1) {
-        throw new VerseException('Verse size is not of standard length.');
+      /* } else if ([16, 32, 64].indexOf(size) === -1) {
+        throw new VerseException('Verse size is not of standard length.'); */
       } else if (typeCheckVerse(phrases)) {
         throw new VerseException('Phrases within the phrase array are not of the Phrase class.');
       } else {
@@ -117,5 +129,8 @@ class Verse {
     } catch (e) {
       console.error(e);
     }
+  }
+  rhyme() {
+    // Hm.
   }
 }

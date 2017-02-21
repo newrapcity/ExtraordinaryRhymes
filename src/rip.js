@@ -4,10 +4,9 @@ const rhymesWith = 'rel_rhy';
 
 const space = /[\s]/;
 const newline = /[\n]/;
-const words = /^[a-zA-Z0-9'‘’!]+$/;
-const endPunct = /[a-zA-Z0-9'‘’!]+[^a-zA-Z0-9'‘’!]$/;
-const startPunct = /^[^a-zA-Z0-9'‘’!][a-zA-Z0-9'‘’!]+/;
-const punct = /[^a-zA-Z0-9'‘’!]/;
+const words = /^[a-zA-Z]+$/;
+const punctWord = /^[a-zA-Z'‘’]+$/;
+const punct = /[^a-zA-Z]/;
 
 function rip(line, withOrWithout) {
   const withPunct = [];
@@ -18,7 +17,7 @@ function rip(line, withOrWithout) {
     if (words.test(word)) {
       withPunct.push(word);
       withoutPunct.push(word);
-    } else if (startPunct.test(word) || endPunct.test(word)) {
+    } else if (punctWord.test(word)) {
       const stripWord = word.replace(punct, '');
       withoutPunct.push(stripWord);
       withPunct.push(word);
