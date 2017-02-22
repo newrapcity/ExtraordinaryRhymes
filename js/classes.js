@@ -91,22 +91,23 @@ var Phrase = function () {
   }, {
     key: 'rhyme',
     value: function rhyme() {
+      var allWords = [];
+      var wordSets = [];
+
       this.bars.forEach(function (bar) {
         var wordArray = bar.ripLine();
-        var alreadyRhymed = new Array(wordArray.length);
-        alreadyRhymed.fill(false);
-        for (var i = 0; i < wordArray.length; i++) {
-          for (var k = i + 1; k < wordArray.length; k++) {
-            if (!alreadyRhymed[i] && !alreadyRhymed[k]) {
-              $.ajax({
-                url: '' + api + rhymesWith + '=' + wordArray[i]
-              }).done(function (rhymeArray) {
-                // Work later.
-              });
-            }
-          }
-        }
+        allWords = allWords.concat(wordArray.slice());
       });
+
+      for (var i = 0; i < allWords.length; i++) {
+        $.ajax({
+          url: '' + api + rhymesWith + '=' + allWords[i]
+        }).done(function (rhymeArray) {
+          wordSets.push(new Set(rhymeArray.map(function (result) {
+            return result['word'];
+          })));
+        });
+      }
     }
   }]);
 
@@ -127,21 +128,32 @@ function typeCheckVerse(phrases) {
   return check;
 }
 
-var Verse = function Verse(size, phrases) {
-  _classCallCheck(this, Verse);
+var Verse = function () {
+  function Verse(size, phrases) {
+    _classCallCheck(this, Verse);
 
-  try {
-    if (size !== phrases.length * 4) {
-      throw new VerseException('Purported size of verse does not match amount of bars given.');
-    } else if ([16, 32, 64].indexOf(size) === -1) {
-      throw new VerseException('Verse size is not of standard length.');
-    } else if (typeCheckVerse(phrases)) {
-      throw new VerseException('Phrases within the phrase array are not of the Phrase class.');
-    } else {
-      this.size = size;
-      this.phrases = phrases;
+    try {
+      if (size !== phrases.length * 4) {
+        throw new VerseException('Purported size of verse does not match amount of bars given.');
+        /* } else if ([16, 32, 64].indexOf(size) === -1) {
+          throw new VerseException('Verse size is not of standard length.'); */
+      } else if (typeCheckVerse(phrases)) {
+        throw new VerseException('Phrases within the phrase array are not of the Phrase class.');
+      } else {
+        this.size = size;
+        this.phrases = phrases;
+      }
+    } catch (e) {
+      console.error(e);
     }
-  } catch (e) {
-    console.error(e);
   }
-};
+
+  _createClass(Verse, [{
+    key: 'rhyme',
+    value: function rhyme() {
+      // Hm.
+    }
+  }]);
+
+  return Verse;
+}();

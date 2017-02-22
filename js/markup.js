@@ -29,7 +29,7 @@ function markup(idNoHashtag, partType) {
       lyrics = IntroProcess(song);
       break;
     case 'chorus':
-      // lyrics = ChorusProcess(song);
+      lyrics = ChorusProcess(song);
       break;
     case 'outro':
       lyrics = OutroProcess(song);
