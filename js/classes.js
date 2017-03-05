@@ -103,10 +103,14 @@ var Phrase = function () {
         $.ajax({
           url: '' + api + rhymesWith + '=' + allWords[i]
         }).done(function (rhymeArray) {
-          wordSets.push(new Set(rhymeArray.map(function (result) {
+          wordSets.push(rhymeArray.map(function (result) {
             return result['word'];
-          })));
+          }));
         });
+      }
+
+      for (var _i = 0; _i < wordSets.length; _i++) {
+        console.log(wordSets[_i]);
       }
     }
   }]);
@@ -151,7 +155,9 @@ var Verse = function () {
   _createClass(Verse, [{
     key: 'rhyme',
     value: function rhyme() {
-      // Hm.
+      for (var i = 0; i < this.phrases.length; i++) {
+        this.phrases[i].rhyme();
+      }
     }
   }]);
 

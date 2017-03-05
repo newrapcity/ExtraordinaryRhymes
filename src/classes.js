@@ -80,10 +80,14 @@ class Phrase {
       $.ajax({
         url: `${api}${rhymesWith}=${allWords[i]}`,
       }).done((rhymeArray) => {
-        wordSets.push(new Set(rhymeArray.map((result) => {
+        wordSets.push(rhymeArray.map((result) => {
           return result['word'];
-        })));
+        }));
       });
+    }
+
+    for (let i = 0; i < wordSets.length; i++) {
+      console.log(wordSets[i]);
     }
   }
 }
@@ -120,6 +124,8 @@ class Verse {
     }
   }
   rhyme() {
-    // Hm.
+    for (let i = 0; i < this.phrases.length; i++) {
+      this.phrases[i].rhyme();
+    }
   }
 }
