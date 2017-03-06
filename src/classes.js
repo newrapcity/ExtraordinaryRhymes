@@ -1,3 +1,5 @@
+/* global api, soundsLike, rhymesWith, space, newLine, wordsNoPunct, punctWord, punct, $, rip, XMLHttpRequest */
+
 function VerseException(message) {
   this.message = message;
   this.name = 'VerseException';
@@ -102,10 +104,10 @@ class Phrase {
   }
   rhyme() {
     let words = [];
-    let rhymes = [];
-    let crayons = new Ink();
+    const rhymes = [];
+    const crayons = new Ink();
 
-    this.bars.forEach((bar, index) => {
+    this.bars.forEach((bar) => {
       const wordArray = bar.wordLine();
       wordArray.push(new Word('\n'));
       words = words.concat(wordArray.slice());
@@ -116,16 +118,16 @@ class Phrase {
       request.open('GET', `${api}${rhymesWith}=${word.word}`, false);
       request.send(null);
 
-      let rhymeArray = JSON.parse(request.responseText);
-      rhymes.push(rhymeArray.map(result => result['word']).slice());
+      const rhymeArray = JSON.parse(request.responseText);
+      rhymes.push(rhymeArray.map(result => result.word).slice());
     });
 
     for (let i = 0; i < words.length; i++) {
-      let dirtyBrush = false
+      let dirtyBrush = false;
       for (let k = i + 1; k < words.length; k++) {
-        if (words[i].rhymed === words[k].rhymed && words[k].rhymed === false) {
+        if (!words[k].rhymed) {
           if ($.inArray(words[k].word, rhymes[i]) !== -1) {
-            words[i].rhyme(crayons.dab());
+            if (!words[i].rhymed) words[i].rhyme(crayons.dab());
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
           }
@@ -135,7 +137,6 @@ class Phrase {
         crayons.use();
       }
     }
-    
     return words;
   }
 }
@@ -174,13 +175,13 @@ class Verse {
   rhyme() {
     let html = '';
     this.phrases.forEach((phrase) => {
-      let words = phrase.rhyme();
+      const words = phrase.rhyme();
       words.forEach((word) => {
         if (word.word === '\n') {
           html += '<br>';
         } else {
           if (word.rhymed) {
-            let highlight = `<span style="background-color: ${word.color}">${word.word}</span>`;
+            const highlight = `<span style="background-color: ${word.color}">${word.word}</span>`;
             html += highlight;
             html += ' ';
           } else {
@@ -189,7 +190,7 @@ class Verse {
           }
         }
       });
-      html += '<br>'
+      html += '<br>';
     });
     return html;
   }

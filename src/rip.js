@@ -4,7 +4,7 @@ const rhymesWith = 'rel_rhy';
 
 const space = /[\s]/;
 const newline = /[\n]/;
-const words = /^[a-zA-Z]+$/;
+const wordsNoPunct = /^[a-zA-Z]+$/;
 
 // This allows for words like "‘till" and "let's", or "I'm". However it strips out the apostrophes since the API only allows alphabetical characters.
 // At the end of the word there is an allowed non-alphabetical character, to cover cases such as: "says:", "where?", "nice!", or "best,".
@@ -18,7 +18,7 @@ function rip(line, withOrWithout) {
   const wordArray = line.split(space);
 
   wordArray.forEach((word) => {
-    if (words.test(word)) {
+    if (wordsNoPunct.test(word)) {
       withPunct.push(word);
       withoutPunct.push(word);
     } else if (punctWord.test(word)) {
