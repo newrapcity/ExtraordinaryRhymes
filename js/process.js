@@ -3,7 +3,7 @@
 function VerseProcess(selection) {
   var verse = [];
   selection = BarProcess(selection);
-  selection = PhraseProcess(selection, verse);
+  verse = PhraseProcess(selection, verse);
   verse = new Verse(verse.length * 4, verse);
   return verse.rhyme();
 }
@@ -19,6 +19,7 @@ function PhraseProcess(selection, verse) {
       phrase = [];
     }
   }
+  return verse;
 }
 
 // This is passed a 2d array, each row is a list of words.

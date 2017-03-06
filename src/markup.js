@@ -1,6 +1,5 @@
-const song = [];
-
 function markup(idNoHashtag, partType) {
+  const song = [];
   const lineArray = $('#' + idNoHashtag).val().split(newline);
   let lyrics = '';
   let index = 0;

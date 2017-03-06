@@ -13,6 +13,36 @@ function PhraseException(message) {
   this.name = 'PhraseException"=';
 }
 
+class Word {
+  constructor(word) {
+    this.word = word;
+    this.rhymed = false;
+    this.color = null;
+  }
+  rhyme(color) {
+    this.rhymed = true;
+    this.color = color;
+  }
+}
+
+class Ink {
+  constructor() {
+    this.colors = ['#ED0A3F', '#FF3F34', '#FF861F', '#FBE870', '#C5E17A', '#01A368', '#76D7EA', '#0066FF', '#8359A3'];
+    this.used = Array(this.colors.length).fill(false);
+    this.index = 0;
+  }
+  dab() {
+    return this.colors[this.index];
+  }
+  use() {
+    this.index += 1;
+    this.used[this.index] = true;
+  }
+  used() {
+    return this.index >= this.colors.length;
+  }
+}
+
 class Bar {
   constructor(line) {
     try {
@@ -30,6 +60,9 @@ class Bar {
   }
   ripLine() {
     return rip(this.line, false);
+  }
+  wordLine() {
+    return rip(this.line, false).map(word => new Word(word));
   }
 }
 
@@ -68,23 +101,42 @@ class Phrase {
     console.log('\n');
   }
   rhyme() {
-    let allWords = [];
-    let wordSets = [];
+    let words = [];
+    let rhymes = [];
+    let crayons = new Ink();
 
-    this.bars.forEach((bar) => {
-      const wordArray = bar.ripLine();
-      allWords = allWords.concat(wordArray.slice());
+    this.bars.forEach((bar, index) => {
+      const wordArray = bar.wordLine();
+      wordArray.push(new Word('\n'));
+      words = words.concat(wordArray.slice());
     });
 
-    for (let i = 0; i < allWords.length; i++) {
-      $.ajax({
-        url: `${api}${rhymesWith}=${allWords[i]}`,
-      }).done((rhymeArray) => {
-        wordSets.push(new Set(rhymeArray.map((result) => {
-          return result['word'];
-        })));
-      });
+    words.forEach((word) => {
+      const request = new XMLHttpRequest();
+      request.open('GET', `${api}${rhymesWith}=${word.word}`, false);
+      request.send(null);
+
+      let rhymeArray = JSON.parse(request.responseText);
+      rhymes.push(rhymeArray.map(result => result['word']).slice());
+    });
+
+    for (let i = 0; i < words.length; i++) {
+      let dirtyBrush = false
+      for (let k = i + 1; k < words.length; k++) {
+        if (words[i].rhymed === words[k].rhymed && words[k].rhymed === false) {
+          if ($.inArray(words[k].word, rhymes[i]) !== -1) {
+            words[i].rhyme(crayons.dab());
+            words[k].rhyme(crayons.dab());
+            dirtyBrush = true;
+          }
+        }
+      }
+      if (dirtyBrush) {
+        crayons.use();
+      }
     }
+    
+    return words;
   }
 }
 
@@ -120,6 +172,25 @@ class Verse {
     }
   }
   rhyme() {
-    // Hm.
+    let html = '';
+    this.phrases.forEach((phrase) => {
+      let words = phrase.rhyme();
+      words.forEach((word) => {
+        if (word.word === '\n') {
+          html += '<br>';
+        } else {
+          if (word.rhymed) {
+            let highlight = `<span style="background-color: ${word.color}">${word.word}</span>`;
+            html += highlight;
+            html += ' ';
+          } else {
+            html += word.word;
+            html += ' ';
+          }
+        }
+      });
+      html += '<br>'
+    });
+    return html;
   }
 }

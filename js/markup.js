@@ -1,8 +1,7 @@
 'use strict';
 
-var song = [];
-
 function markup(idNoHashtag, partType) {
+  var song = [];
   var lineArray = $('#' + idNoHashtag).val().split(newline);
   var lyrics = '';
   var index = 0;
