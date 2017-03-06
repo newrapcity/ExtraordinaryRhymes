@@ -4,3 +4,36 @@ plugins:
 rules:
   no-console:
     off
+  no-unused-vars:
+    off
+  no-plusplus:
+    off
+globals:
+  $: false
+  XMLHttpRequest: false
+  api: false
+  soundsLike: false
+  rhymesWith: false
+  space: false
+  newline: false
+  wordsNoPunct: false
+  punctWord: false
+  punct: false
+  rip: false
+  VerseException: false
+  BarException: false
+  PhraseException: false
+  Word: false
+  Ink: false
+  Bar: false
+  typeCheckPhrase: false
+  Phrase: false
+  typeCheckVerse: false
+  Verse: false
+  VerseProcess: false
+  PhraseProcess: false
+  BridgeProcess: false
+  ChorusProcess: false
+  IntroProcess: false
+  OutroProcess: false
+  markup: false

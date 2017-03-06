@@ -1,5 +1,3 @@
-/* global api, soundsLike, rhymesWith, space, newLine, wordsNoPunct, punctWord, punct, $, rip, XMLHttpRequest */
-
 function VerseException(message) {
   this.message = message;
   this.name = 'VerseException';
@@ -29,7 +27,7 @@ class Word {
 
 class Ink {
   constructor() {
-    this.colors = ['#ED0A3F', '#FF3F34', '#FF861F', '#FBE870', '#C5E17A', '#01A368', '#76D7EA', '#0066FF', '#8359A3'];
+    this.colors = ['#ED0A3F', '#FF861F', '#FBE870', '#C5E17A', '#01A368', '#76D7EA', '#0066FF', '#8359A3', '#03BB85', '#0A6B0D', '#8FD8D8', '#F653A6', '#CA3435', '#FFCBA4', '#CD919E', '#FA9D5A'];
     this.used = Array(this.colors.length).fill(false);
     this.index = 0;
   }
@@ -128,6 +126,9 @@ class Phrase {
         if (!words[k].rhymed) {
           if ($.inArray(words[k].word, rhymes[i]) !== -1) {
             if (!words[i].rhymed) words[i].rhyme(crayons.dab());
+            words[k].rhyme(crayons.dab());
+            dirtyBrush = true;
+          } else if (words[k].word === words[i].word) {
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
           }

@@ -6,8 +6,10 @@ const space = /[\s]/;
 const newline = /[\n]/;
 const wordsNoPunct = /^[a-zA-Z]+$/;
 
-// This allows for words like "‘till" and "let's", or "I'm". However it strips out the apostrophes since the API only allows alphabetical characters.
-// At the end of the word there is an allowed non-alphabetical character, to cover cases such as: "says:", "where?", "nice!", or "best,".
+// This allows for words like "‘till" and "let's", or "I'm".
+// However it strips out the apostrophes since the API only allows alphabetical characters.
+// At the end of the word there is an allowed non-alphabetical character,
+//   to cover cases such as: "says:", "where?", "nice!", or "best,".
 // Issue: hypens and en dashes? What about em dashes?
 const punctWord = /^[a-zA-Z'‘’]+([^a-zA-Z])?$/;
 const punct = /[^a-zA-Z]/g;
