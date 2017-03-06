@@ -2,8 +2,7 @@ const api = 'https://api.datamuse.com/words?';
 const soundsLike = 'sl';
 const rhymesWith = 'rel_rhy';
 
-const space = /[\s]/;
-const newline = /[\n]/;
+const space = /[\s\u2014\u2013\u002D]/;  // Allow the em dash, en dash, and the hyphen-minus.
 const wordsNoPunct = /^[a-zA-Z]+$/;
 
 // This allows for words like "‘till" and "let's", or "I'm".
