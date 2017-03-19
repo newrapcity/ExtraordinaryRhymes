@@ -23,6 +23,9 @@ class Word {
     this.rhymed = true;
     this.color = color;
   }
+  redact() {
+    this.rhymed = true;
+  }
 }
 
 class Ink {
@@ -131,6 +134,9 @@ class Phrase {
           /* } else if (words[k].word === words[i].word) {
             words[k].rhyme(crayons.dab());
             dirtyBrush = true; */
+          /* else if (words[k].word === words[i].word) {
+              words[k].redact();
+            }  */
           }
         }
       }
