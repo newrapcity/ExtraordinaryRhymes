@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 function markup(idNoHashtag, partType) {
   const song = [];
   const lineArray = $(`#${idNoHashtag}`).val().split(newline);
@@ -43,7 +45,7 @@ function markup(idNoHashtag, partType) {
     decompedId[2] = '';
   }
 
-  const name = decompedId[1].charAt(0).toUpperCase() + decompedId[1].slice(1) + decompedId[2];
+  const name = `${decompedId[1].charAt(0).toUpperCase()}${decompedId[1].slice(1)} ${decompedId[2]}`;
   const header = `<h4 class="${newId}">${name}</h4>`;
   const body = `<p style="white-space:pre-line;" class="${newId}">${lyrics}</p>`;
 

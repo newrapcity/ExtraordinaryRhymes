@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return, no-lonely-if */
+
 function VerseException(message) {
   this.message = message;
   this.name = 'VerseException';
@@ -30,7 +32,7 @@ class Word {
 
 class Ink {
   constructor() {
-    this.colors = ['#ED0A3F', '#FF861F', '#FBE870', '#C5E17A', '#01A368', '#76D7EA', '#0066FF', '#8359A3', '#03BB85', '#0A6B0D', '#8FD8D8', '#F653A6', '#CA3435', '#FFCBA4', '#CD919E', '#FA9D5A'];
+    this.colors = ['#FF861F', '#FBE870', '#C5E17A', '#76D7EA', '#03BB85', '#8FD8D8', '#FFCBA4', '#CD919E', '#FA9D5A', '#F4FA9F', '#6CDAE7', '#FFC1CC', ' #CC99BA', '#EBE1C2', '#DCCCD7', '#708EB3'];
     this.used = new Array(this.colors.length).map(() => false);
     this.index = 0;
   }
@@ -86,9 +88,9 @@ function typeCheckPhrase(bars) {
 class Phrase {
   constructor(bars) {
     try {
-      if (bars.length !== 4) {
+      /* if (bars.length !== 4) {
         throw new PhraseException('Phrase must consist of four Bars.');
-      } else if (typeCheckPhrase(bars)) {
+      } else */ if (typeCheckPhrase(bars)) {
         throw new PhraseException('Phrase object must consist four Bar objects.');
       } else {
         this.bars = bars;
@@ -188,7 +190,7 @@ class Verse {
           html += '<br>';
         } else {
           if (word.rhymed) {
-            const highlight = `<span style="background-color: ${word.color}">${word.word}</span>`;
+            const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
             html += highlight;
             html += ' ';
           } else {

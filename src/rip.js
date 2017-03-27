@@ -1,3 +1,5 @@
+/* eslint-disable no-else-return */
+
 const api = 'https://api.datamuse.com/words?';
 const soundsLike = 'sl';
 const rhymesWith = 'rel_rhy';
