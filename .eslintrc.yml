@@ -13,7 +13,8 @@ globals:
   XMLHttpRequest: false
   api: false
   soundsLike: false
-  rhymesWith: false
+  perfectRhyme: false
+  nearRhyme: false
   queryEcho: false
   metadata: false
   syllables: false
