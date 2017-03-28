@@ -12,7 +12,7 @@ function BarException(message) {
 
 function PhraseException(message) {
   this.message = message;
-  this.name = 'PhraseException"=';
+  this.name = 'PhraseException';
 }
 
 class Word {
@@ -88,9 +88,9 @@ function typeCheckPhrase(bars) {
 class Phrase {
   constructor(bars) {
     try {
-      /* if (bars.length !== 4) {
+      if (bars.length !== 4) {
         throw new PhraseException('Phrase must consist of four Bars.');
-      } else */ if (typeCheckPhrase(bars)) {
+      } else if (typeCheckPhrase(bars)) {
         throw new PhraseException('Phrase object must consist four Bar objects.');
       } else {
         this.bars = bars;
@@ -109,7 +109,6 @@ class Phrase {
     let words = [];
     const rhymes = [];
     const crayons = new Ink();
-    // const syllableCount = 0;
 
     this.bars.forEach((bar) => {
       const wordArray = bar.wordLine();
@@ -136,10 +135,9 @@ class Phrase {
             dirtyBrush = true;
           /* } else if (words[k].word === words[i].word) {
             words[k].rhyme(crayons.dab());
-            dirtyBrush = true; */
-          /* else if (words[k].word === words[i].word) {
-              words[k].redact();
-            }  */
+            dirtyBrush = true;
+          } else if (words[k].word === words[i].word) {
+              words[k].redact(); */
           }
         }
       }
@@ -149,15 +147,13 @@ class Phrase {
     }
     return words;
   }
-  function* countSyllables() {
+  countSyllables() {
 
     this.bars.forEach((bar) => {
-
       let syllableCount = 0;
       const wordArray = bar.wordLine();
 
       wordArray.forEach((word) => {
-
         const request = new XMLHttpRequest();
         request.open('GET', `${api}${rhymesWith}=${word.word}&${queryEcho}=${rhymesWith}&${metadata}=${syllables}`, false);
         request.send(null);
@@ -165,11 +161,8 @@ class Phrase {
         const rhymeArray = JSON.parse(request.responseText);
         const firstWord = rhymeArray[0];
         syllableCount += parseInt(firstWord['numSyllables'], 10);
-
       });
-
       yield syllableCount;
-
     });
   } 
 }
