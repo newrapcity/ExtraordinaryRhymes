@@ -118,7 +118,7 @@ class Phrase {
 
     words.forEach((word) => {
       const request = new XMLHttpRequest();
-      request.open('GET', `${api}${rhymesWith}=${word.word}`, false);
+      request.open('GET', `${api}${perfectRhyme}=${word.word}`, false);
       request.send(null);
 
       const rhymeArray = JSON.parse(request.responseText);
@@ -154,7 +154,7 @@ class Phrase {
       const wordArray = bar.wordLine();
       wordArray.forEach((word) => {
         const request = new XMLHttpRequest();
-        request.open('GET', `${api}${rhymesWith}=${word.word}&${queryEcho}=${rhymesWith}&${metadata}=${syllables}`, false);
+        request.open('GET', `${api}${perfectRhyme}=${word.word}&${queryEcho}=${perfectRhyme}&${metadata}=${syllables}`, false);
         request.send(null);
 
         const rhymeArray = JSON.parse(request.responseText);
