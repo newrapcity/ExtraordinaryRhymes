@@ -14,6 +14,9 @@ globals:
   api: false
   soundsLike: false
   rhymesWith: false
+  queryEcho: false
+  metadata: false
+  syllables: false
   space: false
   newline: false
   wordsNoPunct: false

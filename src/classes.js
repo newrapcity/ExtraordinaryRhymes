@@ -148,11 +148,10 @@ class Phrase {
     return words;
   }
   countSyllables() {
-
+    const syllableList = [];
     this.bars.forEach((bar) => {
       let syllableCount = 0;
       const wordArray = bar.wordLine();
-
       wordArray.forEach((word) => {
         const request = new XMLHttpRequest();
         request.open('GET', `${api}${rhymesWith}=${word.word}&${queryEcho}=${rhymesWith}&${metadata}=${syllables}`, false);
@@ -160,11 +159,12 @@ class Phrase {
 
         const rhymeArray = JSON.parse(request.responseText);
         const firstWord = rhymeArray[0];
-        syllableCount += parseInt(firstWord['numSyllables'], 10);
+        syllableCount += parseInt(firstWord.numSyllables, 10);
       });
-      yield syllableCount;
+      syllableList.push(syllableCount);
     });
-  } 
+    return syllableList.slice();
+  }
 }
 
 function typeCheckVerse(phrases) {
@@ -200,13 +200,13 @@ class Verse {
   }
   rhyme() {
     let html = '';
-    let lineNumber = 1;
     this.phrases.forEach((phrase) => {
+      let lineNumber = 1;
       const words = phrase.rhyme();
       const syllables = phrase.countSyllables();
       words.forEach((word) => {
         if (word.word === '\n') {
-          html += ` <b>${lineNumber}</b> (${syllables.next()})`;
+          html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
           lineNumber++;
           html += '<br>';
         } else {
