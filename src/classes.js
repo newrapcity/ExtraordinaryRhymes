@@ -107,7 +107,6 @@ class Phrase {
   }
   rhyme() {
     let words = [];
-    const rhymes = [];
     const crayons = new Ink();
 
     this.bars.forEach((bar) => {
@@ -116,35 +115,34 @@ class Phrase {
       words = words.concat(wordArray.slice());
     });
 
-    words.forEach((word) => {
-      const request = new XMLHttpRequest();
-      request.open('GET', `${api}${perfectRhyme}=${word.word}`, false);
-      request.send(null);
-
-      const rhymeArray = JSON.parse(request.responseText);
-      rhymes.push(rhymeArray.map(result => result.word).slice());
-    });
-
-    for (let i = 0; i < words.length; i++) {
-      let dirtyBrush = false;
-      for (let k = i + 1; k < words.length; k++) {
-        if (!words[k].rhymed) {
-          if ($.inArray(words[k].word.toLowerCase(), rhymes[i]) !== -1) {
-            if (!words[i].rhymed) words[i].rhyme(crayons.dab());
-            words[k].rhyme(crayons.dab());
-            dirtyBrush = true;
-          /* } else if (words[k].word === words[i].word) {
-            words[k].rhyme(crayons.dab());
-            dirtyBrush = true;
-          } else if (words[k].word === words[i].word) {
+    words.forEach((word, index) => {
+      $.ajax({
+        url: `${api}${perfectRhyme}=${word.word}`,
+      }).done((data) => {
+        let dirtyBrush = false;
+        const rhymes = data.map(result => result.word).slice();
+        console.log(rhymes);
+        console.log(index);
+        for (let i = index + 1; i < words.length; i++) {
+          if (!words[i].rhymed) {
+            if ($.inArray(words[i].word.toLowerCase(), rhymes) !== -1) {
+              console.log(words[i].word.toLowerCase());
+              if (!words[index].rhymed) words[index].rhyme(crayons.dab());
+              words[i].rhyme(crayons.dab());
+              dirtyBrush = true;
+            /* } else if (words[k].word === words[i].word) {
+              words[k].rhyme(crayons.dab());
+              dirtyBrush = true;
+            } else if (words[k].word === words[i].word) {
               words[k].redact(); */
+            }
           }
         }
-      }
-      if (dirtyBrush) {
-        crayons.use();
-      }
-    }
+        if (dirtyBrush) {
+          crayons.use();
+        }
+      });
+    });
     return words;
   }
   countSyllables() {
