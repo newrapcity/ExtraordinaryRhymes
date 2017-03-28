@@ -3,6 +3,10 @@
 const api = 'https://api.datamuse.com/words?';
 const soundsLike = 'sl';
 const rhymesWith = 'rel_rhy';
+const metadata = 'md';
+const syllables = 's';
+const and = '&';
+const queryEcho = 'qe';
 
 const space = /[\s\u2014\u2013\u002D]/;  // Allow the em dash, en dash, and the hyphen-minus.
 const newline = /[\n]/;
