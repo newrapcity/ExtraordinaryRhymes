@@ -32,7 +32,15 @@ function VerseProcess(selection) {
   return verse.rhyme();
 }
 
-function ChorusProcess() {}
-function IntroProcess() {}
-function BridgeProcess() {}
-function OutroProcess() {}
+function ChorusProcess(selection) {
+  return selection;
+}
+function IntroProcess(selection) {
+  return selection;
+}
+function BridgeProcess(selection) {
+  return selection;
+}
+function OutroProcess(selection) {
+  return selection;
+}

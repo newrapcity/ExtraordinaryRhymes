@@ -18,23 +18,27 @@ function markup(idNoHashtag, partType) {
   });
 
   switch (partType) {
-    case 'bridge':
-      lyrics = BridgeProcess(song);
-      break;
+    // case 'bridge':
+      // lyrics = BridgeProcess(song);
+      // break;
     case 'verse':
       lyrics = VerseProcess(song);
+      if (lyrics === '') {
+        lyrics = $(`#${idNoHashtag}`).val();
+      }
       break;
-    case 'intro':
-      lyrics = IntroProcess(song);
-      break;
-    case 'chorus':
-      lyrics = ChorusProcess(song);
-      break;
-    case 'outro':
-      lyrics = OutroProcess(song);
-      break;
+    // case 'intro':
+      // lyrics = IntroProcess(song);
+      // break;
+    // case 'chorus':
+      // lyrics = ChorusProcess(song);
+      // break;
+    // case 'outro':
+      // lyrics = OutroProcess(song);
+      // break;
     default:
       // Leave as is.
+      lyrics = $(`#${idNoHashtag}`).val();
       break;
   }
 

@@ -133,12 +133,12 @@ class Phrase {
             if (!words[i].rhymed) words[i].rhyme(crayons.dab());
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
-          /* } else if (words[k].word === words[i].word) {
+          } else if (words[k].word === words[i].word) {
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
-          } else if (words[k].word === words[i].word) {
-              words[k].redact(); */
-          }
+          } /* else if (words[k].word === words[i].word) {
+              words[k].redact();
+          } */
         }
       }
       if (dirtyBrush) {
