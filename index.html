@@ -9,15 +9,18 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 </head>
 
-<body style="background-color:#FAF2AD;">
+<body style="background-color:#FAF2AD;background-image:url(http://sketchoholic.com/uploads/userfiles/18000/fd39c51852_WuTangClan.jpg);background-size:cover;background-blend-mode:color-dodge">
   <div class="container-fluid">
     <div class="row"><center><h2>Extraordinary Rhymes</h2></center></div>
     <div class="row">
-      <div class="col-xs-3 col-md-2"></div>
+      <div class="col-xs-3 col-md-2">
+        <p>Instructions.</p>
+        <p>Drag and drop song parts from the right onto the left column. Parts placed at the top will appear at the top of the chain, and parts placed at the bottom will appear at the bottom of the chain. To remove a song part, drag it from the left and place it in the bin.</p>
+      </div>
       <div class="col-xs-6 col-md-4">
         <center> 
-          <div id="top" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">Start here.</div>
-          <div id="bottom" ondrop="dropIn(event, true)" ondragover="allowDrop(event)">End.</div>
+          <h4 id="top" ondrop="dropIn(event, false)" ondragover="allowDrop(event)">Start.</h4>
+          <h4 id="bottom" ondrop="dropIn(event, true)" ondragover="allowDrop(event)">End.</h4>
         </center>
       </div>
       <div class="col-xs-6 col-md-4">
