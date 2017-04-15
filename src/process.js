@@ -11,6 +11,7 @@ function BarProcess(selection) {
 }
 
 // This is passed an array of bars and returns an array of phrases.
+// It returns phrases only of length 4. Use it in the VerseProcess function.
 function PhraseProcess(selection, verse) {
   let phrase = [];
   for (let i = 0; i < selection.length; i++) {
@@ -33,7 +34,10 @@ function VerseProcess(selection) {
 }
 
 function ChorusProcess(selection) {
-  return selection;
+  selection = BarProcess(selection);
+  selection = new Phrase(selection);
+  const chorus = new Chorus(selection);
+  return chorus.rhyme();
 }
 function IntroProcess(selection) {
   return selection;

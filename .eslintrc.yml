@@ -41,3 +41,4 @@ globals:
   IntroProcess: false
   OutroProcess: false
   markup: false
+  Chorus: false

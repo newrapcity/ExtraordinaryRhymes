@@ -88,10 +88,10 @@ function typeCheckPhrase(bars) {
 class Phrase {
   constructor(bars) {
     try {
-      if (bars.length !== 4) {
+      /* if (bars.length !== 4) {
         throw new PhraseException('Phrase must consist of four Bars.');
-      } else if (typeCheckPhrase(bars)) {
-        throw new PhraseException('Phrase object must consist four Bar objects.');
+      } else */ if (typeCheckPhrase(bars)) {
+        throw new PhraseException('Phrase object must consist Bar objects.');
       } else {
         this.bars = bars;
       }
@@ -222,6 +222,41 @@ class Verse {
       });
       html += '<br>';
     });
+    return html;
+  }
+}
+
+class Chorus {
+
+  constructor(phrase) {
+    this.phrase = phrase;
+  }
+
+  rhyme() {
+    let html = '';
+
+    let lineNumber = 1;
+    const words = this.phrase.rhyme();
+    const syllables = this.phrase.countSyllables();
+
+    words.forEach((word) => {
+      if (word.word === '\n') {
+        html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
+        lineNumber++;
+        html += '<br>';
+      } else {
+        if (word.rhymed) {
+          const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
+          html += highlight;
+          html += ' ';
+        } else {
+          html += word.word;
+          html += ' ';
+        }
+      }
+    });
+
+    html += '<br>';
     return html;
   }
 }

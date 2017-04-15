@@ -1,6 +1,27 @@
 /* eslint-disable no-param-reassign */
 
-function markup(idNoHashtag, partType) {
+function append(newId, anchorId, header, body) {
+  $('#markup').children(`.${newId}`).remove();
+
+  // $('#markup').append(header);
+  // $('#markup').append(body);
+
+  console.log(anchorId);
+
+  if (anchorId === 'top') {
+    $('#markup').prepend(body);
+    $('#markup').prepend(header);
+  } else if ($(`p.${anchorId}`).length > 0) {
+    $(`p.${anchorId}`).after(header).after(body);
+  } else if ($(`#${anchorId}`).prev().attr('id') === undefined) {
+    append(newId, $(`#${anchorId}`).prev().prev('h4').attr('id'), header, body);
+  } else {
+    append(newId, $(`#${anchorId}`).prev('h4').attr('id'), header, body);
+  }
+}
+
+
+function markup(idNoHashtag, partType, anchorId) {
   const song = [];
   const lineArray = $(`#${idNoHashtag}`).val().split(newline);
   let lyrics = '';
@@ -30,9 +51,9 @@ function markup(idNoHashtag, partType) {
     // case 'intro':
       // lyrics = IntroProcess(song);
       // break;
-    // case 'chorus':
-      // lyrics = ChorusProcess(song);
-      // break;
+    case 'chorus':
+      lyrics = ChorusProcess(song);
+      break;
     // case 'outro':
       // lyrics = OutroProcess(song);
       // break;
@@ -53,8 +74,5 @@ function markup(idNoHashtag, partType) {
   const header = `<h4 class="${newId}">${name}</h4>`;
   const body = `<p style="white-space:pre-line;" class="${newId}">${lyrics}</p>`;
 
-  $('#markup').children(`.${newId}`).remove();
-
-  $('#markup').append(header);
-  $('#markup').append(body);
+  append(newId, anchorId, header, body);
 }

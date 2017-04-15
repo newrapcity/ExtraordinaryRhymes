@@ -76,7 +76,7 @@
         $("#" + newId).html(htmlAndId[1].charAt(0).toUpperCase() + htmlAndId[1].slice(1) + " " + htmlAndId[2]);
         $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control " + newId + "\"></textarea>");
         document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
-          markup(newId + "-textarea", htmlAndId[1]);
+          markup(newId + "-textarea", htmlAndId[1], $("#" + newId).prev().prev("h4").attr("id"));
         }, false);
       } else {
         $("#top").after(htmlAndId[0]);
@@ -84,7 +84,7 @@
         $("#" + newId).html(htmlAndId[1].charAt(0).toUpperCase() + htmlAndId[1].slice(1) + " " + htmlAndId[2]);
         $("#" + newId).after("<textarea id=\"" + newId + "-textarea\" class=\"form-control " + newId + "\"></textarea>");
         document.getElementById(newId + "-textarea").addEventListener('keypress', function(event) {
-          markup(newId + "-textarea", htmlAndId[1]);
+          markup(newId + "-textarea", htmlAndId[1], $("#" + newId).prev("h4").attr("id"));
         }, false);
       }
     }
