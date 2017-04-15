@@ -1,5 +1,9 @@
 /* eslint-disable no-param-reassign */
 
+function RhymeProcess(selection) {
+
+}
+
 // This is passed a 2d array, each row is a list of words.
 function BarProcess(selection) {
   selection.forEach((bar, index) => {
