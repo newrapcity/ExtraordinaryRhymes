@@ -6,13 +6,12 @@ function append(newId, anchorId, header, body) {
   // $('#markup').append(header);
   // $('#markup').append(body);
 
-  console.log(anchorId);
-
   if (anchorId === 'top') {
     $('#markup').prepend(body);
     $('#markup').prepend(header);
   } else if ($(`p.${anchorId}`).length > 0) {
-    $(`p.${anchorId}`).after(header).after(body);
+    $(`p.${anchorId}`).after(header);
+    $(`p.${anchorId}`).next().after(body);
   } else if ($(`#${anchorId}`).prev().attr('id') === undefined) {
     append(newId, $(`#${anchorId}`).prev().prev('h4').attr('id'), header, body);
   } else {

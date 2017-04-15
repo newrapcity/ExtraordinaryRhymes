@@ -42,3 +42,4 @@ globals:
   OutroProcess: false
   markup: false
   Chorus: false
+  window: false
