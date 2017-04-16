@@ -22,6 +22,10 @@ function PhraseProcess(selection, verse) {
       phrase = [];
     }
   }
+  if (phrase.length > 0) {
+    phrase = new Phrase(phrase);
+    verse.push(phrase);
+  }
   return verse;
 }
 
