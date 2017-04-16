@@ -134,6 +134,7 @@ class Phrase {
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
           } else if (words[k].word === words[i].word) {
+            if (!words[i].rhymed) words[i].rhyme(crayons.dab());
             words[k].rhyme(crayons.dab());
             dirtyBrush = true;
           } /* else if (words[k].word === words[i].word) {
