@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+   <head>
+      <title> CMSI 402 Course Documentation: Status Page </title>
+      <meta   name="Generator"      content="Textpad 4.7.3">
+      <meta   name="Author"         content="B.J. Johnson">
+      <meta   name="Keywords"       content="Course Documentation">
+      <meta   name="Description"    content="CMSI 401/641 Course Documentation Page">
+      <link   rel ="stylesheet"     type="text/css" href="./css/default1.css" />
+   </head>
+
+   <body>
+      <div class="title" align="center">CMSI Software Engineering Project Status Sheet</div>
+
+      <div>
+         <h5>General Information</h5>
+         <table width="90%" align="center">
+            <tr><td class="normal"><b>Name: James Yen</b></td>
+                <td class="normal"><b>Date: 04-16-17</b></td></tr>
+            <tr><td class="normal"><b>Project<br>Name: Extraordinary Rhymes</b></td>
+                <td class="normal"><b>Period<br>Covered: 04-03-17 &ndash; 04-16-17</b></td></tr>
+         </table>
+
+         <h5>Accomplishments since last report:</h5>
+         <ul><li>Updated aesthetic design of the page</li>
+             <li>Added rhyming for Choruses</li>
+             <li>Added a save lyrics function</li>
+             <li>Added a song structure ordering function (song still has to be assembled in the left-hand column in the correct order)</li>
+             <li>Made some minor tweaks to rhyming</li>
+             <li>Added "live update" (lets lyrics appear in the real-time on the right, as opposed to only every 4 lines, like before)</li>
+         </ul>
+
+         <h5>Scheduled tasks to be done by next report:</h5>
+         <ul><li>See if I can do anything about the async vs. sync issue, if not, simply spruce up the project, thresh out the little details, clean everything up, and turn it in</li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+         </ul>
+
+         <h5>Noteworthy risks, concerns, or problems:</h5>
+         <ul><li>Sync requests are pretty slow, but I'm not sure how to add that without subordinating the rest of the code that follows an async request under the async request (basically restructuring my entire project, since web apps don't have continuously running code, but scripts that are triggered by mouse and keyboard events). I'm not really willing to subordinate all the stuff that comes after the async request to the async function, that would mean that text highlighting and editing of the HTML would be done by that async function, but that overhauls the rest of my code. I guess that's one of the lessons to learn about web app programming, it's mostly async, and it's mostly scripts. I went into this project writing it like a synchronous app (something in Java). Oh well.</li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+         </ul>
+      </div>
+
+    </body>
+</html>
