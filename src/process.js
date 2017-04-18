@@ -29,19 +29,19 @@ function PhraseProcess(selection, verse) {
   return verse;
 }
 
-function VerseProcess(selection) {
+function VerseProcess(selection, idNoHashtag, anchorId) {
   let verse = [];
   selection = BarProcess(selection);
   verse = PhraseProcess(selection, verse);
   verse = new Verse(verse.length * 4, verse);
-  return verse.rhyme();
+  verse.rhyme(idNoHashtag, anchorId);
 }
 
-function ChorusProcess(selection) {
+function ChorusProcess(selection, idNoHashtag, anchorId) {
   selection = BarProcess(selection);
   selection = new Phrase(selection);
   const chorus = new Chorus(selection);
-  return chorus.rhyme();
+  return chorus.rhyme(idNoHashtag, anchorId);
 }
 function IntroProcess(selection) {
   return selection;

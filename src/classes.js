@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return, no-lonely-if */
+/* eslint-disable consistent-return, no-lonely-if, no-param-reassign */
 
 function VerseException(message) {
   this.message = message;
@@ -88,9 +88,7 @@ function typeCheckPhrase(bars) {
 class Phrase {
   constructor(bars) {
     try {
-      /* if (bars.length !== 4) {
-        throw new PhraseException('Phrase must consist of four Bars.');
-      } else */ if (typeCheckPhrase(bars)) {
+      if (typeCheckPhrase(bars)) {
         throw new PhraseException('Phrase object must consist Bar objects.');
       } else {
         this.bars = bars;
@@ -105,9 +103,8 @@ class Phrase {
     }
     console.log('\n');
   }
-  rhyme() {
+  rhyme(idNoHashtag, anchorId) {
     let words = [];
-    const rhymes = [];
     const crayons = new Ink();
 
     this.bars.forEach((bar) => {
@@ -117,36 +114,32 @@ class Phrase {
     });
 
     words.forEach((word) => {
-      const request = new XMLHttpRequest();
-      request.open('GET', `${api}${perfectRhyme}=${word.word}`, false);
-      request.send(null);
+      $.ajax({
+        url: `${api}${perfectRhyme}=${word.word}`,
+      }).done((data) => {
+        const rhymes = data.map(result => result.word).slice();
 
-      const rhymeArray = JSON.parse(request.responseText);
-      rhymes.push(rhymeArray.map(result => result.word).slice());
-    });
-
-    for (let i = 0; i < words.length; i++) {
-      let dirtyBrush = false;
-      for (let k = i + 1; k < words.length; k++) {
-        if (!words[k].rhymed) {
-          if ($.inArray(words[k].word.toLowerCase(), rhymes[i]) !== -1) {
-            if (!words[i].rhymed) words[i].rhyme(crayons.dab());
-            words[k].rhyme(crayons.dab());
-            dirtyBrush = true;
-          } /* else if (words[k].word === words[i].word) {
-            if (!words[i].rhymed) words[i].rhyme(crayons.dab());
-            words[k].rhyme(crayons.dab());
-            dirtyBrush = true;
-          } else if (words[k].word === words[i].word) {
-              words[k].redact();
-          } */
+        for (let i = 0; i < words.length; i++) {
+          let dirtyBrush = false;
+          for (let k = i + 1; k < words.length; k++) {
+            if (!words[k].rhymed) {
+              if ($.inArray(words[k].word.toLowerCase(), rhymes[i]) !== -1) {
+                if (!words[i].rhymed) words[i].rhyme(crayons.dab());
+                words[k].rhyme(crayons.dab());
+                dirtyBrush = true;
+              }
+            }
+          }
+          if (dirtyBrush) {
+            crayons.use();
+          }
         }
-      }
-      if (dirtyBrush) {
-        crayons.use();
-      }
-    }
-    return words;
+
+        let html = '';
+        html = this.markup(html, 1, words);
+        writePage(idNoHashtag, anchorId, html);
+      });
+    });
   }
   countSyllables() {
     const syllableList = [];
@@ -165,6 +158,27 @@ class Phrase {
       syllableList.push(syllableCount);
     });
     return syllableList.slice();
+  }
+  markup(html, lineNumber, words) {
+    const syllables = this.countSyllables();
+    words.forEach((word) => {
+      if (word.word === '\n') {
+        html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
+        lineNumber++;
+        html += '<br>';
+      } else {
+        if (word.rhymed) {
+          const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
+          html += highlight;
+          html += ' ';
+        } else {
+          html += word.word;
+          html += ' ';
+        }
+      }
+    });
+    html += '<br>';
+    return html;
   }
 }
 
@@ -187,8 +201,6 @@ class Verse {
     try {
       if (size !== phrases.length * 4) {
         throw new VerseException('Purported size of verse does not match amount of bars given.');
-      /* } else if ([16, 32, 64].indexOf(size) === -1) {
-        throw new VerseException('Verse size is not of standard length.'); */
       } else if (typeCheckVerse(phrases)) {
         throw new VerseException('Phrases within the phrase array are not of the Phrase class.');
       } else {
@@ -199,65 +211,18 @@ class Verse {
       console.error(e);
     }
   }
-  rhyme() {
-    let html = '';
+  rhyme(idNoHashtag, anchorId) {
     this.phrases.forEach((phrase) => {
-      let lineNumber = 1;
-      const words = phrase.rhyme();
-      const syllables = phrase.countSyllables();
-      words.forEach((word) => {
-        if (word.word === '\n') {
-          html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
-          lineNumber++;
-          html += '<br>';
-        } else {
-          if (word.rhymed) {
-            const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
-            html += highlight;
-            html += ' ';
-          } else {
-            html += word.word;
-            html += ' ';
-          }
-        }
-      });
-      html += '<br>';
+      phrase.rhyme(idNoHashtag, anchorId);
     });
-    return html;
   }
 }
 
 class Chorus {
-
   constructor(phrase) {
     this.phrase = phrase;
   }
-
-  rhyme() {
-    let html = '';
-
-    let lineNumber = 1;
-    const words = this.phrase.rhyme();
-    const syllables = this.phrase.countSyllables();
-
-    words.forEach((word) => {
-      if (word.word === '\n') {
-        html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
-        lineNumber++;
-        html += '<br>';
-      } else {
-        if (word.rhymed) {
-          const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
-          html += highlight;
-          html += ' ';
-        } else {
-          html += word.word;
-          html += ' ';
-        }
-      }
-    });
-
-    html += '<br>';
-    return html;
+  rhyme(idNoHashtag, anchorId) {
+    this.phrase.rhyme(idNoHashtag, anchorId);
   }
 }

@@ -43,3 +43,4 @@ globals:
   markup: false
   Chorus: false
   window: false
+  writePage: false

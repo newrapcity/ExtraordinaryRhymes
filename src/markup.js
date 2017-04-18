@@ -3,9 +3,6 @@
 function append(newId, anchorId, header, body) {
   $('#markup').children(`.${newId}`).remove();
 
-  // $('#markup').append(header);
-  // $('#markup').append(body);
-
   if (anchorId === 'top') {
     $('#markup').prepend(body);
     $('#markup').prepend(header);
@@ -19,6 +16,20 @@ function append(newId, anchorId, header, body) {
   }
 }
 
+function writePage(idNoHashtag, anchorId, lyrics) {
+  const decompId = /([a-zA-Z]*)([0-9]*)(-textarea)/;
+  const decompedId = decompId.exec(idNoHashtag);
+  const newId = decompedId[1] + decompedId[2];
+  if (decompedId[2] === '1') {
+    decompedId[2] = '';
+  }
+
+  const name = `${decompedId[1].charAt(0).toUpperCase()}${decompedId[1].slice(1)} ${decompedId[2]}`;
+  const header = `<h4 class="${newId}">${name}</h4>`;
+  const body = `<p style="white-space:pre-line;" class="${newId}">${lyrics}</p>`;
+
+  append(newId, anchorId, header, body);
+}
 
 function markup(idNoHashtag, partType, anchorId) {
   const song = [];
@@ -42,16 +53,13 @@ function markup(idNoHashtag, partType, anchorId) {
       // lyrics = BridgeProcess(song);
       // break;
     case 'verse':
-      lyrics = VerseProcess(song);
-      if (lyrics === '') {
-        lyrics = $(`#${idNoHashtag}`).val();
-      }
+      VerseProcess(song, idNoHashtag, anchorId);
       break;
     // case 'intro':
       // lyrics = IntroProcess(song);
       // break;
     case 'chorus':
-      lyrics = ChorusProcess(song);
+      ChorusProcess(song, idNoHashtag, anchorId);
       break;
     // case 'outro':
       // lyrics = OutroProcess(song);
@@ -59,19 +67,7 @@ function markup(idNoHashtag, partType, anchorId) {
     default:
       // Leave as is.
       lyrics = $(`#${idNoHashtag}`).val();
+      writePage(idNoHashtag, anchorId, lyrics);
       break;
   }
-
-  const decompId = /([a-zA-Z]*)([0-9]*)(-textarea)/;
-  const decompedId = decompId.exec(idNoHashtag);
-  const newId = decompedId[1] + decompedId[2];
-  if (decompedId[2] === '1') {
-    decompedId[2] = '';
-  }
-
-  const name = `${decompedId[1].charAt(0).toUpperCase()}${decompedId[1].slice(1)} ${decompedId[2]}`;
-  const header = `<h4 class="${newId}">${name}</h4>`;
-  const body = `<p style="white-space:pre-line;" class="${newId}">${lyrics}</p>`;
-
-  append(newId, anchorId, header, body);
 }
