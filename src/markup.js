@@ -3,9 +3,6 @@
 function append(newId, anchorId, header, body) {
   $('#markup').children(`.${newId}`).remove();
 
-  // $('#markup').append(header);
-  // $('#markup').append(body);
-
   if (anchorId === 'top') {
     $('#markup').prepend(body);
     $('#markup').prepend(header);
@@ -24,17 +21,10 @@ function markup(idNoHashtag, partType, anchorId) {
   const song = [];
   const lineArray = $(`#${idNoHashtag}`).val().split(newline);
   let lyrics = '';
-  let index = 0;
 
-  lineArray.forEach((line) => {
+  lineArray.forEach((line, index) => {
     const withoutPunct = rip(line, false);
-    line += '\n';
-    lyrics += line;
-
-    if (withoutPunct.length > 0) {
-      song[index] = withoutPunct.slice();
-      index += 1;
-    }
+    song[index] = withoutPunct.slice();
   });
 
   switch (partType) {

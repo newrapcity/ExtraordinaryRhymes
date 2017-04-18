@@ -11,17 +11,16 @@ function BarProcess(selection) {
 }
 
 // This is passed an array of bars and returns an array of phrases.
-// It returns phrases only of length 4. Use it in the VerseProcess function.
 function PhraseProcess(selection, verse) {
   let phrase = [];
-  for (let i = 0; i < selection.length; i++) {
-    phrase.push(selection[i]);
-    if ((i + 1) % 4 === 0) {
+  selection.forEach((bar, index) => {
+    phrase.push(bar);
+    if (bar === '') {
       phrase = new Phrase(phrase);
       verse.push(phrase);
       phrase = [];
     }
-  }
+  });
   if (phrase.length > 0) {
     phrase = new Phrase(phrase);
     verse.push(phrase);
