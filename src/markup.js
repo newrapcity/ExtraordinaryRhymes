@@ -3,9 +3,6 @@
 function append(newId, anchorId, header, body) {
   $('#markup').children(`.${newId}`).remove();
 
-  // $('#markup').append(header);
-  // $('#markup').append(body);
-
   if (anchorId === 'top') {
     $('#markup').prepend(body);
     $('#markup').prepend(header);

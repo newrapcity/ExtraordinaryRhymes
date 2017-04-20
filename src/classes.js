@@ -228,14 +228,11 @@ class Verse {
 }
 
 class Chorus {
-
   constructor(phrase) {
     this.phrase = phrase;
   }
-
   rhyme() {
     let html = '';
-
     let lineNumber = 1;
     const words = this.phrase.rhyme();
     const syllables = this.phrase.countSyllables();
