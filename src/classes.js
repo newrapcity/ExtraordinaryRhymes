@@ -169,8 +169,8 @@ class Phrase {
   markup() {
     let html = '';
     let lineNumber = 1;
-    const words = this.phrase.rhyme();
-    const syllables = this.phrase.countSyllables();
+    const words = this.rhyme();
+    const syllables = this.countSyllables();
 
     words.forEach((word) => {
       if (word.word === '\n') {
