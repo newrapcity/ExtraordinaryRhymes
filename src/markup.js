@@ -29,6 +29,7 @@ function markup(idNoHashtag, partType, anchorId) {
     lyrics += line;
 
     if (withoutPunct.length > 0) {
+      console.log(withoutPunct);
       song[index] = withoutPunct.slice();
       index += 1;
     }

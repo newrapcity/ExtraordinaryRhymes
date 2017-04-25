@@ -166,6 +166,32 @@ class Phrase {
     });
     return syllableList.slice();
   }
+  markup() {
+    let html = '';
+    let lineNumber = 1;
+    const words = this.phrase.rhyme();
+    const syllables = this.phrase.countSyllables();
+
+    words.forEach((word) => {
+      if (word.word === '\n') {
+        html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
+        lineNumber++;
+        html += '<br>';
+      } else {
+        if (word.rhymed) {
+          const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
+          html += highlight;
+          html += ' ';
+        } else {
+          html += word.word;
+          html += ' ';
+        }
+      }
+    });
+
+    html += '<br>';
+    return html;
+  }
 }
 
 function typeCheckVerse(phrases) {
@@ -202,26 +228,7 @@ class Verse {
   rhyme() {
     let html = '';
     this.phrases.forEach((phrase) => {
-      let lineNumber = 1;
-      const words = phrase.rhyme();
-      const syllables = phrase.countSyllables();
-      words.forEach((word) => {
-        if (word.word === '\n') {
-          html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
-          lineNumber++;
-          html += '<br>';
-        } else {
-          if (word.rhymed) {
-            const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
-            html += highlight;
-            html += ' ';
-          } else {
-            html += word.word;
-            html += ' ';
-          }
-        }
-      });
-      html += '<br>';
+      html += phrase.markup();
     });
     return html;
   }
@@ -232,29 +239,6 @@ class Chorus {
     this.phrase = phrase;
   }
   rhyme() {
-    let html = '';
-    let lineNumber = 1;
-    const words = this.phrase.rhyme();
-    const syllables = this.phrase.countSyllables();
-
-    words.forEach((word) => {
-      if (word.word === '\n') {
-        html += ` <b>${lineNumber}</b> (${syllables[lineNumber - 1]})`;
-        lineNumber++;
-        html += '<br>';
-      } else {
-        if (word.rhymed) {
-          const highlight = `<span style="background-color:${word.color};">${word.word}</span>`;
-          html += highlight;
-          html += ' ';
-        } else {
-          html += word.word;
-          html += ' ';
-        }
-      }
-    });
-
-    html += '<br>';
-    return html;
+    this.phrase.markup();
   }
 }
