@@ -25,8 +25,6 @@ function markup(idNoHashtag, partType, anchorId) {
 
   lineArray.forEach((line) => {
     const withoutPunct = rip(line, false);
-    line += '\n';
-    lyrics += line;
 
     if (withoutPunct.length > 0) {
       console.log(withoutPunct);
