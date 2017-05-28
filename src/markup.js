@@ -16,7 +16,6 @@ function append(newId, anchorId, header, body) {
   }
 }
 
-
 function markup(idNoHashtag, partType, anchorId) {
   const song = [];
   const lineArray = $(`#${idNoHashtag}`).val().split(newline);
